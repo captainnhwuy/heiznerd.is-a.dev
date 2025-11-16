@@ -12,7 +12,7 @@
       @click="handleHideLoading"
       class="text-[large] absolute bottom-[10%] left-[50%] translate-x-[-50%] bg-transparent text-success border-none cursor-pointer font-mono"
     >
-      Skip Loading
+      < Skip Loading >
     </button>
   </div>
   <div
@@ -51,57 +51,57 @@ const handleKeyPress = (event) => {
 const handleTyping = (instance, hideLoading) => {
 	instance
 		.options({
-			lifeLike: true,
+			LifeLike: true,
 			speed: 10,
 		})
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type(
-			"echo \"Press Shift or the 'Skip Animation' button to skip this animation\"",
+			"echo \"Press 'Skip Animation' button to skip\"",
 			{ delay: 200 },
 		)
 		.options({
 			speed: 100,
 		})
 		.break({ instant: true })
-		.type("Press Shift or the 'Skip Animation' button to skip this animation", {
+		.type("Press 'Skip Animation' button to skip", {
 			instant: true,
 		})
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 2000 },
 		)
 		.type("clear", { delay: 100 })
 		.break({ instant: true })
 		.delete(null, { instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
-		.type("whereis love")
+		.type("whereis mylove.js")
 		.break({ instant: true })
-		.type("love:", { instant: true })
+		.type("love: /usr/heiznerd/mylove.js", { instant: true })
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 2000 },
 		)
-		.type("cat love")
+		.type("cat mylove.js")
 		.break({ instant: true })
-		.type("cat: love: No such file or directory", { instant: true })
+		.type("cat: mylove.js: No such file or directory", { instant: true })
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 4000 },
 		)
 		.type(":(", { delay: 1000 })
 		.options({ speed: 1000 })
 		.delete(2, { delay: 500 })
 		.options({ speed: 50 })
-		.type("sudo rm -rf --no-preserve-root /")
+		.type("sudo su", { delay: 300 })
 		.break({ instant: true })
 		.type("[sudo] password for heiznerd: ", { instant: true, delay: 800 })
 		.break({ instant: true })
@@ -111,12 +111,12 @@ const handleTyping = (instance, hideLoading) => {
 		.type("sudo: a password is required", { instant: true })
 		.break({ instant: true, delay: 300 })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ^C',
+			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ^C',
 			{ instant: true, delay: 300 },
 		)
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type("ssh website@heiznerd.com")
@@ -149,7 +149,7 @@ const handleTyping = (instance, hideLoading) => {
 		.type("*****")
 		.break({ instant: true })
 		.type("website@heiznerd.com: ~/ $ ", { instant: true, delay: 500 })
-		.type("sudo atp install heiznerd")
+		.type("sudo apt install heiznerd")
 		.type("-website -y")
 		.options({ speed: 25 })
 		.move(-11)
