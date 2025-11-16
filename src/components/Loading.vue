@@ -1,11 +1,11 @@
 <template>
   <div
     :class="['loading-screen', { hidden: hide }]"
-    class="flex bg-base-300 w-screen h-screen fixed break-all left-0 top-0 z-10"
+    class="flex bg-base-300 w-screen h-screen fixed break-all left-0 top-0 z-10 overflow-auto"
   >
     <div
       ref="typeit"
-      class="font-mono text-base-content text-base whitespace-pre-wrap mt-[5px] pl-[5px]"
+      class="font-mono text-base-content text-base whitespace-pre-wrap mt-[5px] pl-[5px] pb-20"
     ></div>
     <button
       v-if="showSkipButton"
@@ -45,6 +45,14 @@ const handleHideLoading = () => {
 const handleKeyPress = (event) => {
   if (event.key === 'Shift') {
     handleHideLoading();
+  }
+};
+
+// Hàm tự động scroll xuống cuối
+const scrollToBottom = () => {
+  const loadingScreen = document.querySelector('.loading-screen');
+  if (loadingScreen) {
+    loadingScreen.scrollTop = loadingScreen.scrollHeight;
   }
 };
 
@@ -151,13 +159,11 @@ const handleTyping = (instance, hideLoading) => {
 		.type("website@heiznerd.com: ~/ $ ", { instant: true, delay: 500 })
 		.type("sudo atp install heiznerd-website -y", { delay: 300 })
 		.options({ speed: 50 })
-		.move(5) // Di chuyển con trỏ đến 'a' trong 'atp'
-		.delete(3) // Xóa 'atp'
-		.type("apt") // Gõ 'apt'
-		.move(null, { to: "END" }) // Di chuyển con trỏ đến cuối dòng
-		.type(" --production") // Thêm '--production'
+		.delete(30) // Xóa từ cuối về "atp install..."
+		.type("pt install heiznerd-website -y --production") // Gõ lại đúng
 		.options({ speed: 50 })
 		.break({ instant: true, delay: 80 })
+		.exec(scrollToBottom)
 		.type("Deploying...", { instant: true, delay: 100 })
 		.type(" [--------------------] 0%", { instant: true, delay: 400 })
 		.delete(24, { instant: true })
@@ -183,93 +189,125 @@ const handleTyping = (instance, hideLoading) => {
 		)
 		.pause(1000)
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type(
 			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type("sudo apt update", { delay: 200 })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("Hit:1 http://deb.debian.org/debian bookworm InRelease", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("Hit:2 http://deb.debian.org/debian bookworm-updates InRelease", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("Hit:3 http://deb.debian.org/debian-security bookworm-security InRelease", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("Reading package lists... Done", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type(
 			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 1000 },
 		)
 		.type("npm install", { delay: 200 })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("added 1000 packages in 5s", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type(
 			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 1000 },
 		)
 		.type("npm run build", { delay: 200 })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("> heiznerd-bio@0.0.0 build", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("> vite build", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("vite v4.5.0 building for production...", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("✓ 100 modules transformed.", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("dist/index.html                   0.47 kB", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("dist/assets/index-xxxxxxxx.js   144.37 kB", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("dist/assets/index-xxxxxxxx.css    24.51 kB", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("✓ built in 2.5s", { instant: true })
 		.pause(2000)
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type(
 			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type("git status", { delay: 200 })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("On branch main", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("Your branch is up to date with 'origin/main'.", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("nothing to commit, working tree clean", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type(
 			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 1000 },
 		)
 		.type("ls -la", { delay: 200 })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("total 100", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("drwxr-xr-x  1 heiznerd  heiznerd   4096 Nov 16 10:00 .", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("drwxr-xr-x  1 heiznerd  heiznerd   4096 Nov 16 09:00 ..", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("-rw-r--r--  1 heiznerd  heiznerd    123 Nov 15 18:30 .gitignore", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("-rw-r--r--  1 heiznerd  heiznerd   2048 Nov 16 10:05 README.md", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("drwxr-xr-x  1 heiznerd  heiznerd   4096 Nov 16 10:10 src", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type(
 			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 1000 },
 		)
 		.type("cat README.md", { delay: 200 })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("# heiznerd-bio", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("This is a personal portfolio website.", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("Built with Vue 3, Vite, and Tailwind CSS.", { instant: true })
 		.break({ instant: true })
+		.exec(scrollToBottom)
 		.type("More details coming soon...", { instant: true })
 		.pause(2000)
 		.exec(() => {
