@@ -1,30 +1,31 @@
 <template>
   <div id="app">
-    <StarTrails />
-    <Navbar />
-    <main>
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-    </main>
-    <Footer />
+    <Loading :hide="!isLoading" @hide-loading="hideLoading" :show-skip-button="true" />
+    <template v-if="!isLoading">
+      <StarTrails />
+      <Navbar />
+      <main>
+        <router-view />
+      </main>
+      <Footer />
+    </template>
   </div>
 </template>
 
 <script setup>
+import Loading from './components/Loading.vue';
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
 import StarTrails from './components/StarTrails.vue';
-import Hero from './components/Hero.vue';
-import About from './components/About.vue';
-import Skills from './components/Skills.vue';
-import Projects from './components/Projects.vue';
-import Contact from './components/Contact.vue';
 
-import { onMounted, ref, provide, reactive } from 'vue';
+import { ref, provide, reactive, watch, nextTick } from 'vue';
 import { translations } from './translations.js';
+
+const isLoading = ref(true);
+
+const hideLoading = () => {
+  isLoading.value = false;
+};
 
 const lang = ref(localStorage.getItem('preferred-lang') || 'vi');
 const currentLang = ref(lang.value);
@@ -33,7 +34,7 @@ provide('lang', lang);
 provide('currentLang', currentLang);
 provide('translations', reactive(translations));
 
-onMounted(() => {
+const initializeContent = () => {
   // Typed.js
   if (typeof Typed !== 'undefined') {
     new Typed('.typing-text', {
@@ -59,13 +60,14 @@ onMounted(() => {
   // Navbar scroll effect & Active nav link on scroll
   const navbar = document.querySelector('.navbar');
   const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-link');
   // Throttle scroll event for better performance
   let scrollTimeout;
   window.addEventListener('scroll', () => {
     if (scrollTimeout) return;
     
     scrollTimeout = setTimeout(() => {
+      if (!navbar) return;
       // Scrolled class for navbar
       if (window.scrollY > 100) {
         navbar.classList.add('scrolled');
@@ -114,6 +116,14 @@ onMounted(() => {
   skillsSections.forEach(section => {
     skillObserver.observe(section);
   });
+};
+
+watch(isLoading, (newVal) => {
+  if (newVal === false) {
+    nextTick(() => {
+      initializeContent();
+    });
+  }
 });
 
 </script>
