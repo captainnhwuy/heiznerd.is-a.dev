@@ -12,7 +12,7 @@
       @click="handleHideLoading"
       class="text-[large] absolute bottom-[10%] left-[50%] translate-x-[-50%] bg-transparent text-success border-none cursor-pointer font-mono"
     >
-      Skip Loading
+      < Skip Loading >
     </button>
   </div>
   <div
@@ -59,34 +59,34 @@ const scrollToBottom = () => {
 const handleTyping = (instance, hideLoading) => {
 	instance
 		.options({
-			lifeLike: true,
+			UbuntuLike: true,
 			speed: 10,
 		})
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type(
-			"echo \"Press Shift or the 'Skip Animation' button to skip this animation\"",
+			"echo \"Press 'Skip Animation' button to skip this animation\"",
 			{ delay: 200 },
 		)
 		.options({
 			speed: 100,
 		})
 		.break({ instant: true })
-		.type("Press Shift or the 'Skip Animation' button to skip this animation", {
+		.type("Press 'Skip Animation' button to skip this animation", {
 			instant: true,
 		})
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 2000 },
 		)
 		.type("clear", { delay: 100 })
 		.break({ instant: true })
 		.delete(null, { instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type("whereis love")
@@ -94,7 +94,7 @@ const handleTyping = (instance, hideLoading) => {
 		.type("love:", { instant: true })
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 2000 },
 		)
 		.type("cat love")
@@ -102,7 +102,7 @@ const handleTyping = (instance, hideLoading) => {
 		.type("cat: love: No such file or directory", { instant: true })
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 4000 },
 		)
 		.type(":(", { delay: 1000 })
@@ -119,12 +119,12 @@ const handleTyping = (instance, hideLoading) => {
 		.type("sudo: a password is required", { instant: true })
 		.break({ instant: true, delay: 300 })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ^C',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ^C',
 			{ instant: true, delay: 300 },
 		)
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type("ssh website@heiznerd.com")
@@ -191,7 +191,7 @@ const handleTyping = (instance, hideLoading) => {
 		.break({ instant: true })
 		.exec(scrollToBottom)
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type("sudo apt update", { delay: 200 })
@@ -210,17 +210,17 @@ const handleTyping = (instance, hideLoading) => {
 		.break({ instant: true })
 		.exec(scrollToBottom)
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 1000 },
 		)
 		.type("npm install", { delay: 200 })
 		.break({ instant: true })
 		.exec(scrollToBottom)
-		.type("added 1000 packages in 5s", { instant: true })
+		.type("up to date,added 1m packages in 5s", { instant: true })
 		.break({ instant: true })
 		.exec(scrollToBottom)
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 1000 },
 		)
 		.type("npm run build", { delay: 200 })
@@ -252,7 +252,7 @@ const handleTyping = (instance, hideLoading) => {
 		.break({ instant: true })
 		.exec(scrollToBottom)
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type("git status", { delay: 200 })
@@ -268,7 +268,7 @@ const handleTyping = (instance, hideLoading) => {
 		.break({ instant: true })
 		.exec(scrollToBottom)
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 1000 },
 		)
 		.type("ls -la", { delay: 200 })
@@ -293,7 +293,7 @@ const handleTyping = (instance, hideLoading) => {
 		.break({ instant: true })
 		.exec(scrollToBottom)
 		.type(
-			'<span class="text-success">heiznerd@Life</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 1000 },
 		)
 		.type("cat README.md", { delay: 200 })
