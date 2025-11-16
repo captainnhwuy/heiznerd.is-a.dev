@@ -1,25 +1,25 @@
 <template>
   <div
-    :class="['loading-screen', { hidden: hide }]"
-    class="flex bg-base-300 w-screen h-screen fixed break-all left-0 top-0 z-10"
+	:class="['loading-screen', { hidden: hide }]"
+	class="flex bg-base-300 w-screen h-screen fixed break-all left-0 top-0 z-10"
   >
-    <div
-      ref="typeit"
-      class="font-mono text-base-content text-base whitespace-pre-wrap mt-[5px] pl-[5px]"
-    ></div>
-    <button
-      v-if="showSkipButton"
-      @click="handleHideLoading"
-      class="text-[large] absolute bottom-[10%] left-[50%] translate-x-[-50%] bg-transparent text-success border-none cursor-pointer font-mono"
-    >
-      < Skip Loading >
-    </button>
+	<div
+	  ref="typeit"
+	  class="font-mono text-base-content text-base whitespace-pre-wrap mt-[5px] pl-[5px]"
+	></div>
+	<button
+	  v-if="showSkipButton"
+	  @click="handleHideLoading"
+	  class="text-[large] absolute bottom-[10%] left-[50%] translate-x-[-50%] bg-transparent text-success border-none cursor-pointer font-mono"
+	>
+	  Skip Loading
+	</button>
   </div>
   <div
-    :class="['backdrop', { hidden: hide }]"
-    class="z-[-9998] bg-base-200 w-full h-full fixed overflow-scroll break-all backdrop-blur-[3px] m-0 p-0 left-0 top-0"
+	:class="['backdrop', { hidden: hide }]"
+	class="z-[-9998] bg-base-200 w-full h-full fixed overflow-scroll break-all backdrop-blur-[3px] m-0 p-0 left-0 top-0"
   >
-    &nbsp;
+	&nbsp;
   </div>
 </template>
 
@@ -44,18 +44,18 @@ const handleHideLoading = () => {
 
 const handleKeyPress = (event) => {
   if (event.key === 'Shift') {
-    handleHideLoading();
+	handleHideLoading();
   }
 };
 
 const handleTyping = (instance, hideLoading) => {
 	instance
 		.options({
-			LifeLike: true,
+			UbuntuLike: true,
 			speed: 10,
 		})
 		.type(
-			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type(
@@ -71,37 +71,37 @@ const handleTyping = (instance, hideLoading) => {
 		})
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 2000 },
 		)
 		.type("clear", { delay: 100 })
 		.break({ instant: true })
 		.delete(null, { instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
-		.type("whereis mylove.js")
+		.type("whereis love")
 		.break({ instant: true })
-		.type("love: /usr/heiznerd/mylove.js", { instant: true })
+		.type("love:", { instant: true })
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 2000 },
 		)
-		.type("cat mylove.js")
+		.type("cat love")
 		.break({ instant: true })
-		.type("cat: mylove.js: No such file or directory", { instant: true })
+		.type("cat: love: No such file or directory", { instant: true })
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 4000 },
 		)
 		.type(":(", { delay: 1000 })
 		.options({ speed: 1000 })
 		.delete(2, { delay: 500 })
 		.options({ speed: 50 })
-		.type("sudo su", { delay: 300 })
+		.type("sudo rm -rf --no-preserve-root /")
 		.break({ instant: true })
 		.type("[sudo] password for heiznerd: ", { instant: true, delay: 800 })
 		.break({ instant: true })
@@ -111,12 +111,12 @@ const handleTyping = (instance, hideLoading) => {
 		.type("sudo: a password is required", { instant: true })
 		.break({ instant: true, delay: 300 })
 		.type(
-			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ^C',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ^C',
 			{ instant: true, delay: 300 },
 		)
 		.break({ instant: true })
 		.type(
-			'<span class="text-success">heiznerd@Optiplex3050</span>: <span class="text-secondary">/</span> $ ',
+			'<span class="text-success">heiznerd@Ubuntu</span>: <span class="text-secondary">/</span> $ ',
 			{ instant: true, delay: 500 },
 		)
 		.type("ssh website@heiznerd.com")
@@ -149,33 +149,13 @@ const handleTyping = (instance, hideLoading) => {
 		.type("*****")
 		.break({ instant: true })
 		.type("website@heiznerd.com: ~/ $ ", { instant: true, delay: 500 })
-		.type("sudo apt install heiznerd")
-		.type("-website -y")
-		.options({ speed: 25 })
-		.move(-11)
+		.type("sudo atp install heiznerd-website -y", { delay: 300 })
 		.options({ speed: 50 })
-		.delete(2)
-		.type("ef")
-		.options({ speed: 25 })
-		.move(null, { to: "END" })
-		.options({ speed: 50 })
-		.type("odcut")
-		.options({ speed: 25 })
-		.move(-12)
-		.options({ speed: 50 })
-		.delete(2)
-		.type("epl")
-		.options({ speed: 25 })
-		.move(null, { to: "END" })
-		.options({ speed: 50 })
-		.type("ion")
-		.options({ speed: 25 })
-		.move(-4)
-		.options({ speed: 50 })
-		.delete(2)
-		.type("uc")
-		.options({ speed: 25 })
-		.move(null, { to: "END" })
+		.move(5) // Di chuyển con trỏ đến 'a' trong 'atp'
+		.delete(3) // Xóa 'atp'
+		.type("apt") // Gõ 'apt'
+		.move(null, { to: "END" }) // Di chuyển con trỏ đến cuối dòng
+		.type(" --production") // Thêm '--production'
 		.options({ speed: 50 })
 		.break({ instant: true, delay: 80 })
 		.type("Deploying...", { instant: true, delay: 100 })
@@ -203,9 +183,9 @@ const handleTyping = (instance, hideLoading) => {
 		)
 		.pause(2000)
 		.exec(() => {
-      if (instance) {
-        instance.destroy(true);
-      }
+	  if (instance) {
+		instance.destroy(true);
+	  }
 			hideLoading();
 		})
 		.go();
@@ -213,18 +193,18 @@ const handleTyping = (instance, hideLoading) => {
 
 onMounted(() => {
   if (typeit.value) {
-    instance = new TypeIt(typeit.value, {});
-    handleTyping(instance, handleHideLoading);
+	instance = new TypeIt(typeit.value, {});
+	handleTyping(instance, handleHideLoading);
   }
   if (props.showSkipButton) {
-    document.addEventListener('keydown', handleKeyPress);
+	document.addEventListener('keydown', handleKeyPress);
   }
 });
 
 onUnmounted(() => {
   document.removeEventListener('keydown', handleKeyPress);
   if (instance) {
-    instance.destroy(true);
+	instance.destroy(true);
   }
 });
 </script>
