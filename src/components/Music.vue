@@ -56,10 +56,10 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const musicData = {
-  coverImage: "https://cdn.imgchest.com/files/683123112d7e.jpg",
-  songName: "Kể Về Em",
-  artist: "Seachains, Hải Chiền",
-  audioUrl: "/music/keveem.mp3" // Đường dẫn tới file trong thư mục public
+  coverImage: "https://cdn.imgchest.com/files/ee9763215f67.jpg",
+  songName: "Vết Thương",
+  artist: "fishy",
+  audioUrl: "/music/vết thương.mp3" // Đường dẫn tới file trong thư mục public
 };
 
 const isPlaying = ref(false);
