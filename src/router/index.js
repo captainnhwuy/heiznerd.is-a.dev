@@ -9,11 +9,6 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
-    {
-      path: '/alone',
-      name: 'alone',
-      component: Benchmark
-    },
   ]
 })
 
