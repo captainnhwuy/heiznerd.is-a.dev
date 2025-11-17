@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Benchmark from '@/components/Benchmark.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,9 +11,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/alone',
-      name: 'alone',
-      component: () => import('../views/AloneView.vue')
+      path: '/benchmark',
+      name: 'benchmark',
+      component: Benchmark
     },
   ]
 })
