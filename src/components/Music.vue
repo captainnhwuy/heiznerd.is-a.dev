@@ -56,10 +56,10 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const musicData = {
-  coverImage: "https://cdn.imgchest.com/files/5dc48791a4bb.jpg",
-  songName: "In Love",
-  artist: "Justatee, Low G",
-  audioUrl: "https://host.akk1to.tech/inlove.mp3"
+  coverImage: "https://cdn.imgchest.com/files/683123112d7e.jpg",
+  songName: "Kể Về Em",
+  artist: "Seachains, Hải Chiền",
+  audioUrl: "/music/keveem.mp3" // Đường dẫn tới file trong thư mục public
 };
 
 const isPlaying = ref(false);
@@ -79,6 +79,7 @@ const togglePlayPause = () => {
 onMounted(async () => {
   const audioElement = new Audio(musicData.audioUrl);
   audioElement.loop = true;
+  audioElement.volume = 0.3; // Giảm âm lượng xuống 30% (0.0 - 1.0)
   audio.value = audioElement;
 
   try {
