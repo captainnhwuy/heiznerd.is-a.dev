@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       speed: 3.0,
-      starCount: 200,
+      starCount: 230,
       trailLength: 0.85,
       colorScheme: [
         // Sunset colors

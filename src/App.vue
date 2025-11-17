@@ -8,6 +8,7 @@
         <router-view />
       </main>
       <Footer />
+      <Music />
     </template>
   </div>
 </template>
@@ -17,7 +18,7 @@ import Loading from './components/Loading.vue';
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
 import StarTrails from './components/StarTrails.vue';
-
+import Music from './components/Music.vue'; 
 import { ref, provide, reactive, watch, nextTick } from 'vue';
 import { translations } from './translations.js';
 

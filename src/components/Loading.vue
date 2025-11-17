@@ -175,7 +175,7 @@ const handleTyping = (instance, hideLoading) => {
       '<span class="text-[#4EC9B0]">heiznerd@ubuntu</span>:<span class="text-[#4FC1FF]">~</span>$ ',
       { instant: true, delay: 1000 },
     )
-    .type("free -h", { delay: 200 })
+    .type("lsblk", { delay: 200 })
     .break({ instant: true })
     .type("              total        used        free      shared", { instant: true })
     .break({ instant: true })
@@ -350,7 +350,7 @@ const handleTyping = (instance, hideLoading) => {
     // Step 12: Health check
     .type('<span class="text-[#4EC9B0]">✓</span> Deployment successful!', { instant: true })
     .break({ instant: true })
-    .type("🌐 Site URL: https://heiznerd.com", { instant: true })
+    .type("🌐 Site URL: https://heiznerd.is-a.dev", { instant: true })
     .break({ instant: true })
     .break({ instant: true })
     .type("Running health checks...", { instant: true, delay: 800 })
@@ -371,7 +371,7 @@ const handleTyping = (instance, hideLoading) => {
       '<span class="text-[#4EC9B0]">heiznerd@ubuntu</span>:<span class="text-[#4FC1FF]">~/projects/portfolio</span>$ ',
       { instant: true, delay: 1000 },
     )
-    .type("ls -lah", { delay: 200 })
+    .type("ls -la", { delay: 200 })
     .break({ instant: true })
     .type("total 128K", { instant: true })
     .break({ instant: true })
