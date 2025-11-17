@@ -79,7 +79,7 @@ const togglePlayPause = () => {
 onMounted(async () => {
   const audioElement = new Audio(musicData.audioUrl);
   audioElement.loop = true;
-  audioElement.volume = 0.2; // Giảm âm lượng xuống 30% (0.0 - 1.0)
+  audioElement.volume = 0.1; // Giảm âm lượng xuống 30% (0.0 - 1.0)
   audio.value = audioElement;
 
   try {
