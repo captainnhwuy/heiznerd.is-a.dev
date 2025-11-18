@@ -1,25 +1,28 @@
 <template>
   <nav class="navbar" :class="{ scrolled: isScrolled }">
     <div class="nav-content">
-      <a href="#home" class="nav-logo">
+      <a :href="isPomodoroPage ? '/' : '#home'" class="nav-logo">
         <div class="logo-icon">
           <i class="fas fa-code"></i>
         </div>
         <span class="logo-text">Heiznerd</span>
       </a>
-      <ul class="nav-menu">
+
+      <ul class="nav-menu" v-if="!isPomodoroPage">
         <li><a href="#home" class="nav-link">{{ t.home }}</a></li>
         <li><a href="#about" class="nav-link">{{ t.about }}</a></li>
         <li><a href="#skills" class="nav-link">{{ t.skills }}</a></li>
         <li><a href="#projects" class="nav-link">{{ t.projects }}</a></li>
         <li><a href="#contact" class="nav-link">{{ t.contact }}</a></li>
       </ul>
+
       <div class="nav-actions">
         <button class="lang-toggle" @click="toggleLanguage" :title="t.switchLang">
           <span class="lang-icon">{{ currentLang === 'vi' ? '🇻🇳' : '🇺🇸' }}</span>
           <span class="lang-text">{{ currentLang === 'vi' ? 'EN' : 'VI' }}</span>
         </button>
-        <button class="mobile-toggle" @click="toggleMobile">
+        
+        <button class="mobile-toggle" @click="toggleMobile" v-if="!isPomodoroPage">
           <span></span>
           <span></span>
           <span></span>
@@ -30,7 +33,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, inject } from 'vue';
+import { ref, onMounted, onUnmounted, inject, computed } from 'vue';
+import { useRoute } from 'vue-router'; // 1. Import useRoute
+
+// 2. Khởi tạo route để lấy đường dẫn hiện tại
+const route = useRoute();
+
+// 3. Tạo biến computed kiểm tra xem có phải trang Pomodoro không
+const isPomodoroPage = computed(() => {
+  return route.path.includes('/pomodoro');
+});
 
 const isScrolled = ref(false);
 const lang = inject('lang');
@@ -45,7 +57,9 @@ const toggleLanguage = () => {
 
 const toggleMobile = () => {
   const navMenu = document.querySelector('.nav-menu');
-  navMenu.classList.toggle('active');
+  if (navMenu) {
+    navMenu.classList.toggle('active');
+  }
 };
 
 const handleScroll = () => {
