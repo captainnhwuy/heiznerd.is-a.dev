@@ -1,8 +1,6 @@
 <template>
-  <!-- Floating Music Player -->
-  <div class="fixed bottom-6 right-6 z-50">
+  <div v-if="!isHidden" class="fixed bottom-6 right-6 z-50">
     <div class="glass-card backdrop-blur-sm p-4 flex items-center gap-3 min-w-[300px] shadow-2xl">
-      <!-- Album Cover -->
       <div class="relative flex-shrink-0">
         <img
           :src="musicData.coverImage"
@@ -11,7 +9,6 @@
         />
       </div>
 
-      <!-- Song Info -->
       <div class="flex-1 min-w-0">
         <h3 class="font-semibold text-white truncate">
           {{ musicData.songName }}
@@ -21,13 +18,11 @@
         </p>
       </div>
 
-      <!-- Play/Pause Button -->
       <button
         @click="togglePlayPause"
         class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 flex-shrink-0 bg-gradient-to-r from-red-500 to-orange-500 hover:shadow-lg"
         :aria-label="isPlaying ? 'Pause' : 'Play'"
       >
-        <!-- Pause Icon -->
         <svg 
           v-if="isPlaying"
           xmlns="http://www.w3.org/2000/svg" 
@@ -37,7 +32,6 @@
         >
           <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
         </svg>
-        <!-- Play Icon -->
         <svg 
           v-else
           xmlns="http://www.w3.org/2000/svg" 
@@ -53,13 +47,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { useRoute } from 'vue-router'; // 1. Import useRoute
+
+const route = useRoute(); // 2. Khởi tạo route
+
+// 3. Tạo biến computed để kiểm tra xem có đang ở trang pomodoro không
+const isHidden = computed(() => {
+  // Kiểm tra nếu đường dẫn chứa chữ 'pomodoro'
+  return route.path.includes('/pomodoro');
+});
 
 const musicData = {
   coverImage: "https://cdn.imgchest.com/files/ee9763215f67.jpg",
   songName: "Vết Thương",
   artist: "fishy",
-  audioUrl: "/music/vết thương.mp3" // Đường dẫn tới file trong thư mục public
+  audioUrl: "/music/vết thương.mp3"
 };
 
 const isPlaying = ref(false);
@@ -79,18 +82,22 @@ const togglePlayPause = () => {
 onMounted(async () => {
   const audioElement = new Audio(musicData.audioUrl);
   audioElement.loop = true;
-  audioElement.volume = 0.1; // Giảm âm lượng xuống 30% (0.0 - 1.0)
+  audioElement.volume = 0.1;
   audio.value = audioElement;
 
-  try {
-    await audioElement.play();
-    isPlaying.value = true;
-  } catch (error) {
-    console.log("Autoplay was prevented by browser:", error);
+  // Chỉ tự động phát nếu KHÔNG ở trang bị ẩn
+  if (!isHidden.value) {
+    try {
+      await audioElement.play();
+      isPlaying.value = true;
+    } catch (error) {
+      console.log("Autoplay was prevented by browser:", error);
+    }
   }
 });
 
 onUnmounted(() => {
+  // Khi component bị hủy (do v-if = false), nhạc sẽ tự tắt nhờ đoạn này
   if (audio.value) {
     audio.value.pause();
     audio.value.remove();
