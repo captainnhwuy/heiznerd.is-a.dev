@@ -116,7 +116,7 @@
           </div>
           <div class="project-content">
             <div class="project-header">
-              <h3 class="project-title">NekoTech Music</h3>
+              <h3 class="project-title">KentaMusics</h3>
               <div class="project-status">
                 <span class="status-badge active">{{ t.live }}</span>
               </div>
