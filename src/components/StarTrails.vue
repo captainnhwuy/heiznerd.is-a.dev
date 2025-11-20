@@ -9,8 +9,8 @@ export default {
   name: 'StarTrailsAnimation',
   data() {
     return {
-      speed: 3.0,
-      starCount: 190,
+      speed: 2.0,
+      starCount: 150,
       trailLength: 0.85,
       colorScheme: [
         // Sunset colors
