@@ -17,17 +17,17 @@
         </p>
         <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
           <div class="stat-item">
-            <div class="stat-number">10+</div>
+            <div class="stat-number">{{ t.stats.projectsVal }}</div>
             <div class="stat-label">{{ t.projects }}</div>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <div class="stat-number">14</div>
+            <div class="stat-number">{{ t.stats.ageVal }}</div>
             <div class="stat-label">{{ t.age }}</div>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <div class="stat-number">5+</div>
+            <div class="stat-number">{{ t.stats.techVal }}</div>
             <div class="stat-label">{{ t.technologies }}</div>
           </div>
         </div>

@@ -18,121 +18,37 @@
       </div>
 
       <div class="projects-carousel" ref="carousel">
-        <div class="glass-card project-card" data-aos="fade-up" data-aos-delay="100">
+        <div 
+          v-for="(project, index) in projectsList" 
+          :key="index"
+          class="glass-card project-card" 
+          data-aos="fade-up" 
+          :data-aos-delay="100 + (index * 100)"
+        >
           <div class="project-image">
             <div class="project-icon">
-              <i class="fas fa-book-open"></i>
+              <i :class="project.icon"></i>
             </div>
           </div>
           <div class="project-content">
             <div class="project-header">
-              <h3 class="project-title">NekoComics</h3>
+              <h3 class="project-title">{{ t[project.key].name }}</h3>
               <div class="project-status">
-                <span class="status-badge active">{{ t.live }}</span>
+                <span :class="['status-badge', project.statusClass]">{{ project.status === 'live' ? t.live : t.beta }}</span>
               </div>
             </div>
             <p class="project-description">
-              {{ t.nekocomics }}
+              {{ t[project.key].desc }}
             </p>
             <div class="project-tech">
-              <span class="tech-badge"><i class="fab fa-react"></i> React.js</span>
-              <span class="tech-badge"><i class="fas fa-database"></i> MongoDB</span>
-              <span class="tech-badge"><i class="fab fa-node"></i> Node.js</span>
+              <span v-for="(tech, tIndex) in project.tech" :key="tIndex" class="tech-badge">
+                <i :class="tech.icon"></i> {{ tech.name }}
+              </span>
             </div>
             <div class="project-links">
-              <a href="https://nekocomics.xyz/" target="_blank" class="btn btn-project">
-                <span>{{ t.visit }}</span>
-                <i class="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="glass-card project-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="project-image">
-            <div class="project-icon">
-              <i class="fas fa-robot"></i>
-            </div>
-          </div>
-          <div class="project-content">
-            <div class="project-header">
-              <h3 class="project-title">KentaBuckets~</h3>
-              <div class="project-status">
-                <span class="status-badge beta">Beta</span>
-              </div>
-            </div>
-            <p class="project-description">
-              {{ t.mugi }}
-            </p>
-            <div class="project-tech">
-              <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
-              <span class="tech-badge"><i class="fab fa-discord"></i> Discord.js</span>
-              <span class="tech-badge"><i class="fas fa-gamepad"></i> Games</span>
-            </div>
-            <div class="project-links">
-              <a href="https://discord.com/oauth2/authorize?client_id=1372420632628822057&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-project">
-                <span>{{ t.invite }}</span>
-                <i class="fas fa-plus-circle"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="glass-card project-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="project-image">
-            <div class="project-icon">
-              <i class="fas fa-link"></i>
-            </div>
-          </div>
-          <div class="project-content">
-            <div class="project-header">
-              <h3 class="project-title">TruyCapNekoComics</h3>
-              <div class="project-status">
-                <span class="status-badge active">{{ t.live }}</span>
-              </div>
-            </div>
-            <p class="project-description">
-              {{ t.truycap }}
-            </p>
-            <div class="project-tech">
-              <span class="tech-badge"><i class="fab fa-vuejs"></i> Vue.js</span>
-              <span class="tech-badge"><i class="fas fa-server"></i> DNS</span>
-              <span class="tech-badge"><i class="fas fa-globe"></i> Web</span>
-            </div>
-            <div class="project-links">
-              <a href="https://truycapnekocomics.site/" target="_blank" class="btn btn-project">
-                <span>{{ t.visit }}</span>
-                <i class="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="glass-card project-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="project-image">
-            <div class="project-icon">
-              <i class="fas fa-music"></i>
-            </div>
-          </div>
-          <div class="project-content">
-            <div class="project-header">
-              <h3 class="project-title">KentaMusics</h3>
-              <div class="project-status">
-                <span class="status-badge active">{{ t.live }}</span>
-              </div>
-            </div>
-            <p class="project-description">
-              {{ t.nekotech }}
-            </p>
-            <div class="project-tech">
-              <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
-              <span class="tech-badge"><i class="fab fa-discord"></i> Discord.js</span>
-              <span class="tech-badge"><i class="fab fa-spotify"></i> Spotify</span>
-            </div>
-            <div class="project-links">
-              <a href="https://discord.com/oauth2/authorize?client_id=1427516379912994816&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-project">
-                <span>{{ t.invite }}</span>
-                <i class="fas fa-plus-circle"></i>
+              <a :href="project.link" target="_blank" class="btn btn-project">
+                <span>{{ project.linkText === 'visit' ? t.visit : t.invite }}</span>
+                <i :class="project.linkIcon"></i>
               </a>
             </div>
           </div>
@@ -142,7 +58,7 @@
       <!-- Dots Indicator -->
       <div class="carousel-dots">
         <span 
-          v-for="(project, index) in 4" 
+          v-for="(project, index) in projectsList" 
           :key="index"
           :class="['dot', { active: currentSlide === index }]"
           @click="scrollToSlide(index)"
@@ -153,14 +69,73 @@
 </template>
 
 <script setup>
-import { inject, ref, onMounted, onUnmounted } from 'vue';
+import { inject, ref, onMounted, onUnmounted, computed } from 'vue';
 
 const lang = inject('lang');
 const t = inject('translations')[lang.value].projects;
 
+const projectsList = [
+  {
+    key: 'nekocomics',
+    icon: 'fas fa-book-open',
+    status: 'live',
+    statusClass: 'active',
+    tech: [
+      { icon: 'fab fa-react', name: 'React.js' },
+      { icon: 'fas fa-database', name: 'MongoDB' },
+      { icon: 'fab fa-node', name: 'Node.js' }
+    ],
+    link: 'https://nekocomics.xyz/',
+    linkText: 'visit',
+    linkIcon: 'fas fa-external-link-alt'
+  },
+  {
+    key: 'mugi',
+    icon: 'fas fa-robot',
+    status: 'beta',
+    statusClass: 'beta',
+    tech: [
+      { icon: 'fab fa-js', name: 'JavaScript' },
+      { icon: 'fab fa-discord', name: 'Discord.js' },
+      { icon: 'fas fa-gamepad', name: 'Games' }
+    ],
+    link: 'https://discord.com/oauth2/authorize?client_id=1372420632628822057&permissions=8&integration_type=0&scope=bot',
+    linkText: 'invite',
+    linkIcon: 'fas fa-plus-circle'
+  },
+  {
+    key: 'truycap',
+    icon: 'fas fa-link',
+    status: 'live',
+    statusClass: 'active',
+    tech: [
+      { icon: 'fab fa-vuejs', name: 'Vue.js' },
+      { icon: 'fas fa-server', name: 'DNS' },
+      { icon: 'fas fa-globe', name: 'Web' }
+    ],
+    link: 'https://truycapnekocomics.site/',
+    linkText: 'visit',
+    linkIcon: 'fas fa-external-link-alt'
+  },
+  {
+    key: 'nekotech',
+    icon: 'fas fa-music',
+    status: 'live',
+    statusClass: 'active',
+    tech: [
+      { icon: 'fab fa-js', name: 'JavaScript' },
+      { icon: 'fab fa-discord', name: 'Discord.js' },
+      { icon: 'fab fa-spotify', name: 'Spotify' }
+    ],
+    link: 'https://discord.com/oauth2/authorize?client_id=1427516379912994816&permissions=8&integration_type=0&scope=bot',
+    linkText: 'invite',
+    linkIcon: 'fas fa-plus-circle'
+  }
+];
+
 const carousel = ref(null);
 const currentSlide = ref(0);
-const totalSlides = 4;
+const totalSlides = projectsList.length;
 let autoScrollInterval = null;
 let isAutoScrolling = true;
 

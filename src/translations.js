@@ -17,7 +17,12 @@ export const translations = {
       viewWork: 'Xem dự án',
       contact: 'Liên hệ',
       available: 'Sẵn sàng làm việc',
-      scroll: 'Cuộn xuống'
+      scroll: 'Cuộn xuống',
+      stats: {
+        projectsVal: '10+',
+        ageVal: '14',
+        techVal: '5+'
+      }
     },
     about: {
       label: 'Giới thiệu',
@@ -43,10 +48,23 @@ export const translations = {
       title: 'Dự án nổi bật',
       subtitle: 'Vuốt sang để xem thêm dự án',
       live: 'Đang hoạt động',
-      nekocomics: 'Website đọc truyện thân thiện với độc giả và dịch giả, dễ sử dụng với giao diện hiện đại. Phương châm: "Đọc truyện văn minh, duy trì lâu dài".',
-      mugi: 'Bot Discord đa năng với các tính năng: Uma Musume Discord Games [Beta], Mini Games, hệ thống Balance và nhiều tính năng thú vị khác.',
-      truycap: 'Truy cập danh sách tên miền của NekoComics và các dịch vụ liên quan. "Nhanh gọn, tốc độ, dễ dàng truy cập".',
-      nekotech: 'Bot phát nhạc Discord chuyên nghiệp hỗ trợ nhiều nguồn: Spotify, YouTube, SoundCloud. Sử dụng lệnh /play <tên bài hát>. "Mượt mà, dễ sử dụng".',
+      beta: 'Beta',
+      nekocomics: {
+        name: 'NekoComics',
+        desc: 'Website đọc truyện thân thiện với độc giả và dịch giả, dễ sử dụng với giao diện hiện đại. Phương châm: "Đọc truyện văn minh, duy trì lâu dài".'
+      },
+      mugi: {
+        name: 'KentaBuckets~',
+        desc: 'Bot Discord đa năng với các tính năng: Uma Musume Discord Games [Beta], Mini Games, hệ thống Balance và nhiều tính năng thú vị khác.'
+      },
+      truycap: {
+        name: 'TruyCapNekoComics',
+        desc: 'Truy cập danh sách tên miền của NekoComics và các dịch vụ liên quan. "Nhanh gọn, tốc độ, dễ dàng truy cập".'
+      },
+      nekotech: {
+        name: 'KentaMusics',
+        desc: 'Bot phát nhạc Discord chuyên nghiệp hỗ trợ nhiều nguồn: Spotify, YouTube, SoundCloud. Sử dụng lệnh /play <tên bài hát>. "Mượt mà, dễ sử dụng".'
+      },
       visit: 'Truy cập',
       invite: 'Mời bot'
     },
@@ -81,7 +99,12 @@ export const translations = {
       viewWork: 'View Work',
       contact: 'Get in Touch',
       available: 'Available for work',
-      scroll: 'Scroll down'
+      scroll: 'Scroll down',
+      stats: {
+        projectsVal: '10+',
+        ageVal: '14',
+        techVal: '5+'
+      }
     },
     about: {
       label: 'About',
@@ -107,10 +130,23 @@ export const translations = {
       title: 'Featured Projects',
       subtitle: 'Swipe to explore more projects',
       live: 'Live',
-      nekocomics: 'Reader-friendly and translator-friendly manga website with modern interface. Motto: "Read manga civilized, maintain long-term".',
-      mugi: 'Multi-purpose Discord bot featuring: Uma Musume Discord Games [Beta], Mini Games, Balance system and many other exciting features.',
-      truycap: 'Access the list of NekoComics domains and related services. "Quick, fast, easy access".',
-      nekotech: 'Professional Discord music bot supporting multiple sources: Spotify, YouTube, SoundCloud. Use command /play <song name>. "Smooth, easy to use".',
+      beta: 'Beta',
+      nekocomics: {
+        name: 'NekoComics',
+        desc: 'Reader-friendly and translator-friendly manga website with modern interface. Motto: "Read manga civilized, maintain long-term".'
+      },
+      mugi: {
+        name: 'KentaBuckets~',
+        desc: 'Multi-purpose Discord bot featuring: Uma Musume Discord Games [Beta], Mini Games, Balance system and many other exciting features.'
+      },
+      truycap: {
+        name: 'TruyCapNekoComics',
+        desc: 'Access the list of NekoComics domains and related services. "Quick, fast, easy access".'
+      },
+      nekotech: {
+        name: 'KentaMusics',
+        desc: 'Professional Discord music bot supporting multiple sources: Spotify, YouTube, SoundCloud. Use command /play <song name>. "Smooth, easy to use".'
+      },
       visit: 'Visit Site',
       invite: 'Invite Bot'
     },

@@ -2,7 +2,7 @@
   <div id="app">
     <Loading :hide="!isLoading" @hide-loading="hideLoading" :show-skip-button="true" />
     <template v-if="!isLoading">
-      <StarTrails />
+      <WallpaperSlideshow />
       <Navbar />
       <main>
         <router-view />
@@ -17,10 +17,13 @@
 import Loading from './components/Loading.vue';
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
-import StarTrails from './components/StarTrails.vue';
+import WallpaperSlideshow from './components/WallpaperSlideshow.vue';
 import Music from './components/Music.vue'; 
 import { ref, provide, reactive, watch, nextTick } from 'vue';
 import { translations } from './translations.js';
+import Typed from 'typed.js';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const isLoading = ref(true);
 
@@ -37,45 +40,33 @@ provide('translations', reactive(translations));
 
 const initializeContent = () => {
   // Typed.js
-  if (typeof Typed !== 'undefined') {
-    new Typed('.typing-text', {
-      strings: [
-        'Frontend Developer',
-        'Vue.js Enthusiast',
-      ],
-      typeSpeed: 80,
-      backSpeed: 60,
-      backDelay: 2000,
-      loop: true
-    });
-  }
+  new Typed('.typing-text', {
+    strings: [
+      'Frontend Developer',
+      'Vue.js Enthusiast',
+    ],
+    typeSpeed: 80,
+    backSpeed: 60,
+    backDelay: 2000,
+    loop: true
+  });
 
   // AOS
-  if (typeof AOS !== 'undefined') {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }
+  AOS.init({
+    duration: 1000,
+    once: true,
+  });
 
-  // Navbar scroll effect & Active nav link on scroll
-  const navbar = document.querySelector('.navbar');
+  // Active nav link on scroll
   const sections = document.querySelectorAll('section');
   const navLinks = document.querySelectorAll('.nav-link');
+  
   // Throttle scroll event for better performance
   let scrollTimeout;
   window.addEventListener('scroll', () => {
     if (scrollTimeout) return;
     
     scrollTimeout = setTimeout(() => {
-      if (!navbar) return;
-      // Scrolled class for navbar
-      if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-
       // Active class for nav links
       let current = '';
       sections.forEach(section => {
