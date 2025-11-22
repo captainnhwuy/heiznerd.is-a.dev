@@ -16,14 +16,17 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const wallpapers = [
-  "1293442.jpg", "1293921.png", "1296323.jpg", "1311994.jpeg", "1319293.jpeg",
-  "1320321.jpeg", "1324943.png", "1329400.jpeg", "1330710.png", "1336072.png",
-  "1337168.png", "1337367.png", "1338293.jpeg", "1340472.png", "1341233.jpeg",
-  "1344447.png", "1351629.png", "1354199.jpeg", "1354206.jpeg", "1354394.jpeg",
-  "1356519.jpeg", "1358125.png", "1360433.png", "1363709.png", "1369866.png",
-  "1371030.png", "1378665.png", "596630.jpg", "737474.png", "896653.jpg",
-  "901101.png", "909769.png", "926968.png", "934905.jpg", "937353.png",
-  "973967.jpg"
+  "1293442.jpg", "1293921.png", "1296323.jpg", "1311951.jpg", "1311994.jpeg",
+  "1319293.jpeg", "1320252.jpeg", "1320321.jpeg", "1322952.jpeg", "1324943.png",
+  "1329400.jpeg", "1329417.jpeg", "1330283.jpeg", "1330710.png", "1334619.jpeg",
+  "1336072.png", "1337168.png", "1337169.png", "1337366.png", "1337367.png",
+  "1337377.png", "1338293.jpeg", "1340472.png", "1341233.jpeg", "1344447.png",
+  "1344769.png", "1347905.png", "1351629.png", "1354199.jpeg", "1354206.jpeg",
+  "1354394.jpeg", "1356519.jpeg", "1356868.png", "1358125.png", "1358528.png",
+  "1358901.png", "1360433.png", "1363709.png", "1369866.png", "1371030.png",
+  "1378665.png", "596630.jpg", "737474.png", "782992.png", "808037.jpeg",
+  "896653.jpg", "901101.png", "909769.png", "917910.png", "926968.png",
+  "934905.jpg", "937353.png", "973967.jpg"
 ];
 
 const currentIndex = ref(0);
@@ -40,8 +43,8 @@ onMounted(() => {
   // wallpapers.sort(() => Math.random() - 0.5);
   currentImage.value = wallpapers[currentIndex.value];
 
-  // Change wallpaper every 20 minutes (20 * 60 * 1000 ms)
-  timer = setInterval(nextWallpaper, 20 * 60 * 1000);
+  // Change wallpaper every 1 minute (1 * 60 * 1000 ms)
+  timer = setInterval(nextWallpaper, 1 * 60 * 1000);
 });
 
 onUnmounted(() => {
