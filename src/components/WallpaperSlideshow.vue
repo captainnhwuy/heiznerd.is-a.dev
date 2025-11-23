@@ -50,6 +50,10 @@ onMounted(() => {
 onUnmounted(() => {
   if (timer) clearInterval(timer);
 });
+
+defineExpose({
+  nextWallpaper
+});
 </script>
 
 <style scoped>

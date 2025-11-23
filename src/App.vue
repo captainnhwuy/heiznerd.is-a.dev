@@ -2,7 +2,7 @@
   <div id="app">
     <Loading :hide="!isLoading" @hide-loading="hideLoading" :show-skip-button="true" />
     <template v-if="!isLoading">
-      <WallpaperSlideshow />
+      <WallpaperSlideshow ref="wallpaperSlideshow" />
       <Navbar />
       <main>
         <router-view />
@@ -26,6 +26,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const isLoading = ref(true);
+const wallpaperSlideshow = ref(null);
 
 const hideLoading = () => {
   isLoading.value = false;
@@ -37,6 +38,12 @@ const currentLang = ref(lang.value);
 provide('lang', lang);
 provide('currentLang', currentLang);
 provide('translations', reactive(translations));
+
+provide('changeWallpaper', () => {
+  if (wallpaperSlideshow.value) {
+    wallpaperSlideshow.value.nextWallpaper();
+  }
+});
 
 const initializeContent = () => {
   // Typed.js
