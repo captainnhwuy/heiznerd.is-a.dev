@@ -14,16 +14,18 @@
 </template>
 
 <script setup>
-import Loading from './components/Loading.vue';
 import Navbar from './components/Navbar.vue';
-import Footer from './components/Footer.vue';
 import WallpaperSlideshow from './components/WallpaperSlideshow.vue';
-import Music from './components/Music.vue'; 
-import { ref, provide, reactive, watch, nextTick } from 'vue';
+import Loading from './components/Loading.vue'; // Keep explicit import for LCP/First view
+import { ref, provide, reactive, watch, nextTick, defineAsyncComponent, onMounted, onUnmounted } from 'vue';
 import { translations } from './translations.js';
 import Typed from 'typed.js';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+// Lazy load heavy components that are not critical for LCP
+const Footer = defineAsyncComponent(() => import('./components/Footer.vue'));
+const Music = defineAsyncComponent(() => import('./components/Music.vue'));
 
 const isLoading = ref(true);
 const wallpaperSlideshow = ref(null);
@@ -45,6 +47,37 @@ provide('changeWallpaper', () => {
   }
 });
 
+// Intersection Observer for Active Nav Link
+let observer;
+const setupIntersectionObserver = () => {
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const options = {
+    root: null,
+    rootMargin: '-50% 0px -50% 0px', // Trigger when section is in middle of viewport
+    threshold: 0
+  };
+
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').slice(1) === id) {
+             link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, options);
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+};
+
 const initializeContent = () => {
   // Typed.js
   new Typed('.typing-text', {
@@ -64,36 +97,8 @@ const initializeContent = () => {
     once: true,
   });
 
-  // Active nav link on scroll
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-link');
-  
-  // Throttle scroll event for better performance
-  let scrollTimeout;
-  window.addEventListener('scroll', () => {
-    if (scrollTimeout) return;
-    
-    scrollTimeout = setTimeout(() => {
-      // Active class for nav links
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-          current = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-          link.classList.add('active');
-        }
-      });
-      
-      scrollTimeout = null;
-    }, 50);
-  });
+  // Setup Navigation Observer
+  setupIntersectionObserver();
 
   // Skill bars animation
   const skillObserver = new IntersectionObserver((entries) => {
@@ -122,6 +127,12 @@ watch(isLoading, (newVal) => {
     nextTick(() => {
       initializeContent();
     });
+  }
+});
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect();
   }
 });
 

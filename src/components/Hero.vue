@@ -54,9 +54,14 @@
         </div>
       </div>
       <div class="hero-image" data-aos="fade-left" data-aos-delay="400">
-        <div class="image-wrapper">
+        <div 
+          class="image-wrapper" 
+          @mousemove="handleMouseMove" 
+          @mouseleave="resetTilt"
+          ref="imageWrapper"
+        >
           <div class="image-glow"></div>
-          <div class="image-container">
+          <div class="image-container" :style="tiltStyle">
             <img src="/evernight-dancing.gif" alt="Heiznerd Avatar">
           </div>
           <div class="status-badge">
@@ -77,8 +82,41 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
+import { inject, ref, computed } from 'vue';
 import DateTimeEvents from './DateTimeEvents.vue';
 const lang = inject('lang');
 const t = inject('translations')[lang.value].hero;
+
+const imageWrapper = ref(null);
+const tiltX = ref(0);
+const tiltY = ref(0);
+
+const tiltStyle = computed(() => {
+  return {
+    transform: `perspective(1000px) rotateX(${tiltX.value}deg) rotateY(${tiltY.value}deg) scale3d(1.05, 1.05, 1.05)`,
+    transition: 'transform 0.1s ease-out'
+  };
+});
+
+const handleMouseMove = (e) => {
+  if (!imageWrapper.value) return;
+  
+  const rect = imageWrapper.value.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+  
+  const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
+  const rotateY = ((x - centerX) / centerX) * 10;
+  
+  tiltX.value = rotateX;
+  tiltY.value = rotateY;
+};
+
+const resetTilt = () => {
+  tiltX.value = 0;
+  tiltY.value = 0;
+};
 </script>

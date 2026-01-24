@@ -76,6 +76,16 @@ export const translations = {
       viewProfile: 'Xem profile',
       connect: 'Kết nối'
     },
+    timeline: {
+      label: 'Hành trình',
+      title: 'Chặng đường phát triển',
+      items: [
+        { year: '2024', title: 'Phát triển NekoComics', desc: 'Xây dựng nền tảng đọc truyện thân thiện với người dùng.' },
+        { year: '2023', title: 'Bắt đầu với Vue.js', desc: 'Chuyển đổi sang sử dụng framework hiện đại và yêu thích Vue.' },
+        { year: '2022', title: 'Làm quen lập trình', desc: 'Bắt đầu hành trình với những dòng code đầu tiên (Discord.js).' },
+        { year: '2011', title: 'Hello World', desc: 'Chào đời và bắt đầu khám phá thế giới.' }
+      ]
+    },
     footer: {
       designedBy: 'Thiết kế & Xây dựng bởi',
       rights: 'Quyền hạn được bảo lưu.'
@@ -87,6 +97,7 @@ export const translations = {
       about: 'About',
       skills: 'Skills',
       projects: 'Projects',
+      timeline: 'Timeline',
       contact: 'Contact',
       switchLang: 'Chuyển sang Tiếng Việt'
     },
@@ -149,6 +160,16 @@ export const translations = {
       },
       visit: 'Visit Site',
       invite: 'Invite Bot'
+    },
+    timeline: {
+      label: 'Journey',
+      title: 'My Path',
+      items: [
+        { year: '2024', title: 'Building NekoComics', desc: 'Developing a user-friendly manga reading platform.' },
+        { year: '2023', title: 'Starting with Vue.js', desc: 'Switching to modern frameworks and falling in love with Vue.' },
+        { year: '2022', title: 'First steps in Coding', desc: 'Started the journey with the first lines of code (Discord.js).' },
+        { year: '2011', title: 'Hello World', desc: 'Born and started exploring the world.' }
+      ]
     },
     contact: {
       label: 'Contact',
