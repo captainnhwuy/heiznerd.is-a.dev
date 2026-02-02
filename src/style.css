@@ -150,6 +150,14 @@ section {
     /* Remove text-stroke as it can cause issues, use text-shadow for depth if needed */
     text-shadow: 4px 4px 0px var(--primary);
     letter-spacing: -2px;
+    transition: all 0.2s;
+}
+
+.section-title:hover {
+    letter-spacing: 2px;
+    text-shadow: 6px 6px 0px var(--secondary);
+    color: var(--bg-dark);
+    -webkit-text-stroke: 2px var(--text-primary);
 }
 
 .section-label {
@@ -271,8 +279,8 @@ body::after {
 .btn-primary:hover {
     background: transparent;
     color: var(--primary);
-    box-shadow: 6px 6px 0px 0px #fff;
-    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px 0px #fff;
+    transform: translate(-4px, -4px) rotate(2deg);
 }
 
 .btn-secondary {
@@ -285,8 +293,8 @@ body::after {
 .btn-secondary:hover {
     background: var(--text-primary);
     color: black;
-    box-shadow: 6px 6px 0px 0px var(--text-muted);
-    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px 0px var(--text-muted);
+    transform: translate(-4px, -4px) rotate(-2deg);
 }
 
 .btn i {
@@ -370,7 +378,7 @@ body::after {
     background: var(--text-primary) !important;
     color: black !important;
     font-weight: 900;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.5);
     /* Glitch text effect on hover */
     text-shadow: 2px 0 var(--white);
 }

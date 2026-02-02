@@ -3,7 +3,17 @@
     <div class="noise-bg"></div>
     <Loading :hide="!isLoading" @hide-loading="hideLoading" :show-skip-button="true" />
     <template v-if="!isLoading">
+      <CustomCursor />
       <Navbar />
+      <VerticalMarquee />
+      
+      <!-- Decorative Stickers -->
+      <Sticker text="100% VUE.JS" top="15%" right="10%" rotation="15deg" color="var(--primary)" />
+      <Sticker text="NO BUGS" top="45%" left="5%" rotation="-10deg" color="var(--secondary)" />
+      <Sticker text="APPROVED" bottom="20%" right="15%" rotation="5deg" color="#00FFFF" />
+
+      <Hero />
+      <Marquee />
       <main>
         <router-view />
       </main>
@@ -14,6 +24,10 @@
 </template>
 
 <script setup>
+import CustomCursor from './components/CustomCursor.vue';
+import Marquee from './components/Marquee.vue';
+import VerticalMarquee from './components/VerticalMarquee.vue';
+import Sticker from './components/Sticker.vue';
 import Navbar from './components/Navbar.vue';
 import Loading from './components/Loading.vue'; // Keep explicit import for LCP/First view
 import { ref, provide, reactive, watch, nextTick, defineAsyncComponent, onMounted, onUnmounted } from 'vue';
