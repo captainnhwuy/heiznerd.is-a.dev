@@ -4,7 +4,8 @@
       <div class="section-header" data-aos="fade-up">
         <span class="section-label">{{ t.label }}</span>
         <h2 class="section-title">{{ t.title }}</h2>
-        <p class="section-subtitle">{{ t.subtitle }}</p>
+        <div class="section-subtitle-text" v-if="t.headerSubtitle">{{ t.headerSubtitle }}</div>
+        <p class="section-subtitle" v-if="t.description">{{ t.description }}</p>
       </div>
       <div class="contact-content">
         <div class="contact-grid">

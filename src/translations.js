@@ -4,6 +4,7 @@ export const translations = {
       home: 'Trang chủ',
       about: 'Giới thiệu',
       skills: 'Kỹ năng',
+      timeline: 'Hành trình',
       projects: 'Dự án',
       contact: 'Liên hệ',
       switchLang: 'Switch to English'
@@ -26,7 +27,8 @@ export const translations = {
     },
     about: {
       label: 'Giới thiệu',
-      title: 'Tớ là ai?',
+      title: 'Who am I?',
+      headerSubtitle: 'Tớ là ai?',
       intro: 'Xin chào!',
       paragraph1: 'Tớ là Heiznerd (AKA Capta1nHwuy), một developer trẻ 14 tuổi đam mê công nghệ và anime. Tớ đặc biệt yêu thích thể loại Rom-com (Lãng mạn - Hài hước).',
       paragraph2: 'Sau 128,168+ giờ sống trên đời này (kể từ 20/08/2011), tớ đã dành phần lớn thời gian để khám phá thế giới lập trình và xem anime.',
@@ -39,14 +41,16 @@ export const translations = {
     },
     skills: {
       label: 'Kỹ năng',
-      title: 'Công nghệ & Công cụ',
+      title: 'Technologies & Tools',
+      headerSubtitle: 'Công nghệ & Công cụ',
       languages: 'Ngôn ngữ lập trình',
       tools: 'Công cụ & Framework'
     },
     projects: {
       label: 'Portfolio',
-      title: 'Dự án nổi bật',
-      subtitle: 'Vuốt sang để xem thêm dự án',
+      title: 'Featured Projects',
+      headerSubtitle: 'Dự án nổi bật',
+      description: 'Vuốt sang để xem thêm dự án',
       live: 'Đang hoạt động',
       beta: 'Beta',
       nekocomics: {
@@ -70,16 +74,19 @@ export const translations = {
     },
     contact: {
       label: 'Liên hệ',
-      title: 'Kết nối với tớ',
-      subtitle: 'Bạn có ý tưởng, dự án hoặc muốn hợp tác? Hãy liên hệ với tớ!',
+      title: 'Get in Touch',
+      headerSubtitle: 'Kết nối với tớ',
+      description: 'Bạn có ý tưởng, dự án hoặc muốn hợp tác? Hãy liên hệ với tớ!',
       message: 'Nhắn tin',
       viewProfile: 'Xem profile',
       connect: 'Kết nối'
     },
     timeline: {
       label: 'Hành trình',
-      title: 'Chặng đường phát triển',
+      title: 'My Path',
+      headerSubtitle: 'Chặng đường phát triển',
       items: [
+        { year: '2025', title: 'CO-Founder NekoTech Foundations', desc: 'Leader của NekoComics. Mở rộng hệ sinh thái.' },
         { year: '2024', title: 'Phát triển NekoComics', desc: 'Xây dựng nền tảng đọc truyện thân thiện với người dùng.' },
         { year: '2023', title: 'Bắt đầu với Vue.js', desc: 'Chuyển đổi sang sử dụng framework hiện đại và yêu thích Vue.' },
         { year: '2022', title: 'Làm quen lập trình', desc: 'Bắt đầu hành trình với những dòng code đầu tiên (Discord.js).' },
@@ -120,6 +127,7 @@ export const translations = {
     about: {
       label: 'About',
       title: 'Who am I?',
+      headerSubtitle: null,
       intro: 'Hello!',
       paragraph1: 'I\'m Heiznerd (AKA Capta1nHwuy), a 14-year-old rookie developer passionate about technology and anime. I especially love Rom-com (Romantic Comedy) genre.',
       paragraph2: 'After 128,168+ hours living in this world (since 20/08/2011), I\'ve spent most of my time exploring the programming world and watching anime.',
@@ -133,13 +141,15 @@ export const translations = {
     skills: {
       label: 'Skills',
       title: 'Technologies & Tools',
+      headerSubtitle: null,
       languages: 'Programming Languages',
       tools: 'Tools & Frameworks'
     },
     projects: {
       label: 'Portfolio',
       title: 'Featured Projects',
-      subtitle: 'Swipe to explore more projects',
+      headerSubtitle: null,
+      description: 'Swipe to explore more projects',
       live: 'Live',
       beta: 'Beta',
       nekocomics: {
@@ -164,7 +174,9 @@ export const translations = {
     timeline: {
       label: 'Journey',
       title: 'My Path',
+      headerSubtitle: null,
       items: [
+        { year: '2025', title: 'CO-Founder NekoTech Foundations', desc: 'Leader of NekoComics. Expanding the ecosystem.' },
         { year: '2024', title: 'Building NekoComics', desc: 'Developing a user-friendly manga reading platform.' },
         { year: '2023', title: 'Starting with Vue.js', desc: 'Switching to modern frameworks and falling in love with Vue.' },
         { year: '2022', title: 'First steps in Coding', desc: 'Started the journey with the first lines of code (Discord.js).' },
@@ -174,7 +186,8 @@ export const translations = {
     contact: {
       label: 'Contact',
       title: 'Get in Touch',
-      subtitle: 'Have an idea, project or want to collaborate? Let\'s connect!',
+      headerSubtitle: null,
+      description: 'Have an idea, project or want to collaborate? Let\'s connect!',
       message: 'Send Message',
       viewProfile: 'View Profile',
       connect: 'Connect'

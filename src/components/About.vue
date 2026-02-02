@@ -4,6 +4,7 @@
       <div class="section-header" data-aos="fade-up">
         <span class="section-label">{{ t.label }}</span>
         <h2 class="section-title">{{ t.title }}</h2>
+        <div class="section-subtitle-text" v-if="t.headerSubtitle">{{ t.headerSubtitle }}</div>
       </div>
       <div class="about-content">
         <div class="about-text" data-aos="fade-right" data-aos-delay="100">

@@ -1,47 +1,45 @@
 <template>
   <section id="skills" class="skills">
     <div class="container">
-      <div class="section-header" data-aos="fade-up">
+      <div class="section-header" data-aos="fade-right">
         <span class="section-label">{{ t.label }}</span>
         <h2 class="section-title">{{ t.title }}</h2>
+        <div class="section-subtitle-text" v-if="t.headerSubtitle">{{ t.headerSubtitle }}</div>
       </div>
       <div class="skills-grid">
-        <div class="glass-card skill-category" data-aos="fade-up" data-aos-delay="100">
+        <!-- Languages Column -->
+        <div class="skill-category" data-aos="fade-up">
           <div class="category-header">
-            <div class="category-icon">
-              <i class="fas fa-code"></i>
-            </div>
+            <i class="fas fa-code category-icon"></i>
             <h3 class="category-title">{{ t.languages }}</h3>
           </div>
-          <div class="skill-bars">
-            <div class="skill-bar" v-for="skill in languages" :key="skill.name">
-              <div class="skill-info">
-                <div class="skill-name">
-                  <i :class="skill.icon"></i>
-                  <span>{{ skill.name }}</span>
-                </div>
-                <span class="skill-percent">{{ skill.level }}%</span>
+          <div class="skill-list">
+            <div class="skill-item" v-for="skill in languages" :key="skill.name">
+              <div class="skill-meta">
+                <span class="skill-name">
+                  <i :class="skill.icon"></i> {{ skill.name }}
+                </span>
+                <span class="skill-pct">{{ skill.level }}%</span>
               </div>
-              <div class="skill-progress">
-                <div class="skill-fill" :data-percent="skill.level" :style="{ '--fill-color': skill.color }"></div>
+              <div class="progress-track">
+                <div class="progress-fill" :style="{ width: skill.level + '%', background: skill.color }"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="glass-card skill-category" data-aos="fade-up" data-aos-delay="200">
+        <!-- Tools Column -->
+        <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
           <div class="category-header">
-            <div class="category-icon">
-              <i class="fas fa-tools"></i>
-            </div>
+            <i class="fas fa-tools category-icon"></i>
             <h3 class="category-title">{{ t.tools }}</h3>
           </div>
-          <div class="tech-grid">
-            <div class="tech-card" v-for="tech in technologies" :key="tech.name" data-aos="zoom-in" :data-aos-delay="tech.delay">
-              <div class="tech-icon" :style="{ color: tech.color }">
+          <div class="tools-grid">
+            <div class="tool-card" v-for="tech in technologies" :key="tech.name">
+              <div class="tool-icon" :style="{ color: tech.color }">
                 <i :class="tech.icon"></i>
               </div>
-              <div class="tech-name">{{ tech.name }}</div>
+              <div class="tool-name">{{ tech.name }}</div>
             </div>
           </div>
         </div>
@@ -49,6 +47,104 @@
     </div>
   </section>
 </template>
+
+<style scoped>
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 4px solid var(--text-primary);
+  padding-bottom: 0.5rem;
+}
+
+.category-icon {
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.category-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skill-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.progress-track {
+  height: 20px;
+  background: #111;
+  border: 1px solid var(--text-secondary);
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  position: relative;
+}
+
+/* Tools Grid */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.tool-card {
+  aspect-ratio: 1;
+  background: black;
+  border: 2px solid var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  cursor: crosshair;
+}
+
+.tool-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 var(--primary);
+  border-color: var(--primary);
+}
+
+.tool-icon {
+  font-size: 2rem;
+}
+
+.tool-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+</style>
+
 
 <script setup>
 import { ref, inject } from 'vue';

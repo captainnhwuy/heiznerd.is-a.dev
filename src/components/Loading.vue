@@ -2,18 +2,18 @@
   <Transition name="fade">
     <div
       v-if="!hide"
-      class="loading-screen fixed inset-0 bg-[#0a0014] z-[9999] overflow-hidden font-ubuntu text-[13px] md:text-[14px] leading-relaxed text-[#f0f0f0]"
+      class="loading-screen fixed inset-0 bg-black z-[9999] overflow-hidden font-ubuntu text-[13px] md:text-[14px] leading-relaxed text-[#f0f0f0]"
       @click="focusInput"
     >
       <!-- Terminal Header -->
-      <div class="terminal-header fixed top-0 left-0 right-0 bg-[#1a0a1a] h-9 flex items-center px-4 border-b border-[#333] z-20 select-none shadow-sm">
+      <div class="terminal-header fixed top-0 left-0 right-0 bg-black h-9 flex items-center px-4 border-b-2 border-white z-20 select-none">
         <div class="flex gap-2 absolute left-4">
-          <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-          <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-          <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+          <div class="w-3 h-3 bg-[#ff5f56] border border-white"></div>
+          <div class="w-3 h-3 bg-[#ffbd2e] border border-white"></div>
+          <div class="w-3 h-3 bg-[#27c93f] border border-white"></div>
         </div>
-        <div class="flex-1 text-center text-[#999] text-xs font-mono flex justify-center items-center gap-2 opacity-80">
-          <span class="text-green-500">➜</span> heiznerd@ubuntu: ~
+        <div class="flex-1 text-center text-[#999] text-xs font-mono flex justify-center items-center gap-2 opacity-80 decoration-none uppercase font-bold">
+          <span class="text-[var(--primary)]">➜</span> heiznerd@ubuntu: ~
         </div>
         <div class="absolute right-4 text-[10px] text-[#666] font-mono">tty1</div>
       </div>
@@ -30,7 +30,7 @@
       <!-- Minimalist Skip Button -->
       <button 
         @click.stop="handleSkipLoading"
-        class="fixed bottom-6 right-6 px-4 py-2 bg-[#E95420] hover:bg-[#d84315] text-white font-mono text-xs font-bold rounded transition-colors duration-200 z-50 flex items-center gap-2 shadow-lg"
+        class="fixed bottom-6 right-6 px-4 py-2 bg-[#E95420] hover:bg-white hover:text-black border-2 border-white text-white font-mono text-xs font-bold transition-none z-50 flex items-center gap-2 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
       >
         <span>SKIP BOOT</span>
         <span class="text-[10px] opacity-70">[SHIFT]</span>
