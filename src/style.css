@@ -202,12 +202,54 @@ section {
     }
 }
 
-.tech-card:hover .tech-icon,
-.tool-card:hover .tool-icon {
-    animation: jitter 0.3s infinite rough;
-    color: var(--primary) !important;
-    text-shadow: 2px 2px 0px #fff;
+@keyframes twitch {
+    0% {
+        transform: skew(0deg);
+    }
+
+    5% {
+        transform: skew(10deg);
+    }
+
+    10% {
+        transform: skew(-10deg);
+    }
+
+    15% {
+        transform: skew(0deg);
+    }
+
+    50% {
+        transform: skew(0deg);
+    }
+
+    55% {
+        transform: skew(5deg) translate(2px, 0);
+    }
+
+    60% {
+        transform: skew(0deg);
+    }
+
+    100% {
+        transform: skew(0deg);
+    }
 }
+
+.section-label,
+.tech-label,
+.status-indicator {
+    display: inline-block;
+    animation: twitch 5s infinite;
+}
+
+.tech-item:hover {
+    background: var(--primary);
+    color: black;
+    animation: twitch 0.5s infinite;
+}
+
+
 
 /* DELETED DUPLICATE SECTION TITLE HERE */
 

@@ -17,6 +17,7 @@
           class="project-card" 
           data-aos="fade-up" 
           :data-aos-delay="index * 100"
+          :style="{ transform: `rotate(${Math.random() * 4 - 2}deg)` }"
         >
           <div class="card-header">
             <div class="header-main">
@@ -66,9 +67,10 @@ const projectsList = [
     icon: 'fas fa-book-open',
     status: 'live',
     tech: [
-      { name: 'React.js' },
-      { name: 'MongoDB' },
-      { name: 'Node.js' }
+      { name: 'Vue.js' },
+      { name: 'Ruby on Rails' },
+      { name: 'PostgreSQL' },
+      { name: 'Redis' }
     ],
     link: 'https://nekocomics.xyz/',
     linkText: 'visit'
@@ -96,18 +98,6 @@ const projectsList = [
     ],
     link: 'https://truycapnekocomics.site/',
     linkText: 'visit'
-  },
-  {
-    key: 'nekotech',
-    icon: 'fas fa-music',
-    status: 'live',
-    tech: [
-      { name: 'JavaScript' },
-      { name: 'Discord.js' },
-      { name: 'Spotify' }
-    ],
-    link: 'https://discord.com/oauth2/authorize?client_id=1427516379912994816&permissions=8&integration_type=0&scope=bot',
-    linkText: 'invite'
   }
 ];
 </script>
@@ -207,6 +197,13 @@ const projectsList = [
   color: var(--text-muted);
   font-weight: 700;
   margin-bottom: 0.5rem;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+.tech-label:hover {
+  color: var(--primary);
+  animation: twitch 0.5s infinite;
 }
 
 .tech-list {

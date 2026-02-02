@@ -65,10 +65,6 @@ export const translations = {
         name: 'TruyCapNekoComics',
         desc: 'Truy cập danh sách tên miền của NekoComics và các dịch vụ liên quan. "Nhanh gọn, tốc độ, dễ dàng truy cập".'
       },
-      nekotech: {
-        name: 'KentaMusics',
-        desc: 'Bot phát nhạc Discord chuyên nghiệp hỗ trợ nhiều nguồn: Spotify, YouTube, SoundCloud. Sử dụng lệnh /play <tên bài hát>. "Mượt mà, dễ sử dụng".'
-      },
       visit: 'Truy cập',
       invite: 'Mời bot'
     },
@@ -110,7 +106,7 @@ export const translations = {
     },
     hero: {
       greeting: 'Hi, I\'m',
-      description: 'Frontend Developer passionate about building web applications with Vue.js, React.js and Node.js',
+      description: 'Frontend Developer passionate about building web applications with Vue.js and Node.js',
       projects: 'Projects',
       age: 'Years old',
       technologies: 'Technologies',
@@ -163,10 +159,6 @@ export const translations = {
       truycap: {
         name: 'TruyCapNekoComics',
         desc: 'Access the list of NekoComics domains and related services. "Quick, fast, easy access".'
-      },
-      nekotech: {
-        name: 'KentaMusics',
-        desc: 'Professional Discord music bot supporting multiple sources: Spotify, YouTube, SoundCloud. Use command /play <song name>. "Smooth, easy to use".'
       },
       visit: 'Visit Site',
       invite: 'Invite Bot'

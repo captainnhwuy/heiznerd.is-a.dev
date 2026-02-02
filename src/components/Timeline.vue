@@ -7,6 +7,12 @@
         <div class="section-subtitle-text" v-if="t.headerSubtitle">{{ t.headerSubtitle }}</div>
       </div>
       
+      <div class="running-text-bg">
+        <div class="rt-content">
+          HISTORY • PATH • JOURNEY • GROWTH • HISTORY • PATH • JOURNEY • GROWTH • 
+        </div>
+      </div>
+
       <div class="timeline-container">
         <div 
           v-for="(item, index) in t.items" 
@@ -93,6 +99,31 @@
 .timeline-desc {
   font-size: 1rem;
   color: var(--text-secondary);
+}
+
+.running-text-bg {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%) rotate(-10deg);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  overflow: hidden;
+}
+
+.rt-content {
+  font-size: 10rem;
+  font-weight: 900;
+  white-space: nowrap;
+  color: var(--text-primary);
+  animation: scrollText 40s linear infinite;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 </style>
 

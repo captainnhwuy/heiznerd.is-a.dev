@@ -1,12 +1,70 @@
 <template>
   <div class="vertical-marquee">
-    <div class="vm-content">
-      <span v-for="n in 20" :key="n" class="vm-item">
+    <div 
+      class="vm-content" 
+      ref="marqueeContent"
+      :style="{ transform: `translateY(${offset}px)` }"
+    >
+      <!-- Duplicated content for seamless scrolling -->
+      <span v-for="n in 40" :key="n" class="vm-item">
         SCROLL &nbsp;•&nbsp; EXPLORE &nbsp;•&nbsp; CREATE &nbsp;•&nbsp;
       </span>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const marqueeContent = ref(null);
+const offset = ref(0);
+const baseSpeed = 0.5;
+let lastScrollY = 0;
+let scrollVelocity = 0;
+let animationFrameId = null;
+
+const animate = () => {
+  // Friction to slowly reduce velocity back to 0
+  scrollVelocity *= 0.95;
+  if (Math.abs(scrollVelocity) < 0.01) scrollVelocity = 0;
+
+  // Move content
+  // Direction depends on preference, here we move UP
+  const currentSpeed = baseSpeed + scrollVelocity;
+  offset.value -= currentSpeed;
+
+  // Seamless Check
+  // We assume the content is duplicated or long enough. 
+  // Ideally we should measure height. For now, let's reset efficiently.
+  const contentHeight = marqueeContent.value ? marqueeContent.value.scrollHeight / 2 : 1000;
+  
+  if (Math.abs(offset.value) >= contentHeight) {
+    offset.value = 0;
+  }
+
+  animationFrameId = requestAnimationFrame(animate);
+};
+
+const handleScroll = () => {
+  const currentScrollY = window.scrollY;
+  // Increase velocity based on scroll delta
+  // Limiting max velocity to avoid chaos
+  const delta = Math.abs(currentScrollY - lastScrollY);
+  scrollVelocity += Math.min(delta * 0.1, 15); 
+  
+  lastScrollY = currentScrollY;
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+  animationFrameId = requestAnimationFrame(animate);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+  cancelAnimationFrame(animationFrameId);
+});
+</script>
 
 <style scoped>
 .vertical-marquee {
@@ -27,9 +85,10 @@
   writing-mode: vertical-rl;
   text-orientation: mixed;
   white-space: nowrap;
-  animation: scrollVertical 20s linear infinite;
+  /* Removed CSS Animation */
   display: flex;
   align-items: center;
+  will-change: transform;
 }
 
 .vm-item {
@@ -38,11 +97,6 @@
   font-size: 1rem;
   color: var(--text-muted);
   padding: 1rem 0;
-}
-
-@keyframes scrollVertical {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
 }
 
 @media (max-width: 768px) {

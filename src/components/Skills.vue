@@ -35,7 +35,7 @@
             <h3 class="category-title">{{ t.tools }}</h3>
           </div>
           <div class="tools-grid">
-            <div class="tool-card" v-for="tech in technologies" :key="tech.name">
+            <div class="tool-card" v-for="tech in technologies" :key="tech.name" :style="{ transform: `rotate(${Math.random() * 6 - 3}deg)` }">
               <div class="tool-icon" :style="{ color: tech.color }">
                 <i :class="tech.icon"></i>
               </div>
@@ -80,6 +80,15 @@
   font-size: 1.5rem;
   font-weight: 900;
   text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+.category-title:hover {
+  color: var(--primary);
+  animation: twitch 0.3s infinite;
+  text-shadow: 2px 2px 0px var(--secondary);
 }
 
 .skill-list {
@@ -162,6 +171,9 @@ const languages = ref([
 
 const technologies = ref([
   { name: 'Node.js', icon: 'fab fa-node-js', color: '#68a063', delay: 50 },
+  { name: 'Ruby on Rails', icon: 'fas fa-gem', color: '#CC0000', delay: 75 },
+  { name: 'PostgreSQL', icon: 'fas fa-database', color: '#336791', delay: 100 },
+  { name: 'Redis', icon: 'fas fa-server', color: '#D82C20', delay: 125 },
   { name: 'React', icon: 'fab fa-react', color: '#61dafb', delay: 100 },
   { name: 'Git', icon: 'fab fa-git-alt', color: '#f05032', delay: 150 },
   { name: 'GitHub', icon: 'fab fa-github', color: '#fff', delay: 200 },
