@@ -145,7 +145,7 @@ const playlist = [
     coverImage: "/SAOSOIDUONGDEN.jpg"
   },
   {
-    songName: "Kẻ Vẽ Em",
+    songName: "Kể về Em",
     artist: "Unknown",
     audioUrl: "/music/keveem.mp3",
     coverImage: "/preview.jpg"
