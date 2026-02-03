@@ -626,31 +626,51 @@ body::after {
 }
 
 .hero-description {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
+    font-size: 1.1rem;
+    color: var(--text-primary);
     line-height: 1.6;
     max-width: 600px;
-    border: 1px solid var(--text-muted);
+    border-left: 5px solid var(--primary);
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: #0a0a0a;
+    position: relative;
+    font-family: 'JetBrains Mono', monospace;
+    box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.05);
+    margin-bottom: 2rem;
+}
+
+.hero-description::before {
+    content: '> SYSTEM_LOG';
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
 .hero-stats {
     display: flex;
-    align-items: stretch;
-    background: black;
-    border: 2px solid var(--text-primary);
+    gap: 1.5rem;
+    background: transparent;
+    border: none;
 }
 
 .stat-item {
     text-align: center;
     flex: 1;
-    padding: 1rem;
-    transition: background 0.2s;
+    padding: 1.5rem 1rem;
+    background: #000;
+    border: 1px solid var(--text-muted);
+    transition: all 0.2s;
+    position: relative;
+    box-shadow: 5px 5px 0px 0px var(--text-muted);
 }
 
 .stat-item:hover {
     background: var(--primary);
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0px 0px white;
+    border-color: black;
 }
 
 .stat-item:hover .stat-number {
@@ -660,13 +680,15 @@ body::after {
 
 .stat-item:hover .stat-label {
     color: black;
+    font-weight: 900;
 }
 
 .stat-number {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--text-primary);
+    font-size: 3rem;
+    font-weight: 900;
+    color: white;
     line-height: 1;
+    font-family: 'Outfit', sans-serif;
 }
 
 .stat-label {
@@ -675,11 +697,11 @@ body::after {
     margin-top: 0.5rem;
     text-transform: uppercase;
     font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .stat-divider {
-    width: 2px;
-    background: var(--text-primary);
+    display: none;
 }
 
 .hero-buttons {
