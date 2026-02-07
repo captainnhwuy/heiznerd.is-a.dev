@@ -142,6 +142,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--space-md);
+    padding-right: calc(var(--space-md) + 40px);
+    /* Add space for Vertical Marquee */
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     background: radial-gradient(ellipse at center, rgba(5, 5, 5, 0.8) 0%, rgba(5, 5, 5, 0) 80%);
@@ -389,11 +391,20 @@ body::after {
     width: 100%;
     z-index: 1000;
     padding: 1rem 0;
+    /* Avoid Vertical Marquee overlap */
     transition: all 0.2s;
-    background: rgba(5, 5, 5, 0.6);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 40px 20px rgba(0, 0, 0, 0.6);
+    background: rgba(5, 5, 5, 0.95);
+    /* More solid to prevent visual clash */
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 40px 20px rgba(0, 0, 0, 0.8);
     border-bottom: 2px solid var(--text-primary);
+}
+
+@media (min-width: 769px) {
+    .navbar {
+        padding-right: 50px;
+        /* Only add space on desktop where Vertical Marquee exists */
+    }
 }
 
 .nav-content {

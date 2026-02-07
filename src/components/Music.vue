@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isHidden" class="fixed bottom-6 right-6 z-50">
+  <div v-if="!isHidden" class="fixed bottom-6 right-6 md:right-14 z-50">
     <div class="glass-card backdrop-blur-sm p-4 flex items-center gap-3 min-w-[340px] shadow-2xl">
       <div class="relative flex-shrink-0 group">
         <img

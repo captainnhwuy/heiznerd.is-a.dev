@@ -1,5 +1,5 @@
 <template>
-  <section id="home" class="hero">
+  <section id="home" class="hero" style="padding-right: 50px;">
     <div class="hero-container">
       <div class="hero-content">
         <div class="hero-badge" data-aos="fade-down">
