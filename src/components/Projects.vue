@@ -1,6 +1,17 @@
 <template>
   <section id="projects" class="projects">
     <div class="container">
+      <!-- Local Stickers -->
+      <Sticker text="SHIP IT" top="10%" left="5%" rotation="-8deg" color="#FF00FF" />
+      <Sticker text="OPEN SOURCE" bottom="5%" right="5%" rotation="12deg" color="#FFFFFF" />
+      <!-- Random Character Sticker -->
+      <Sticker :image="randomSticker" top="85%" right="25%" rotation="-5deg" scale="0.8" />
+      <Sticker :image="randomSticker2" top="0%" left="30%" rotation="10deg" scale="0.7" />
+      <Sticker :image="randomSticker3" bottom="20%" left="5%" rotation="-15deg" scale="0.6" />
+      <Sticker :image="randomSticker4" top="15%" right="35%" rotation="8deg" scale="0.75" />
+      <Sticker :image="randomSticker5" bottom="10%" left="40%" rotation="-10deg" scale="0.7" />
+      <Sticker :image="randomSticker6" top="50%" right="5%" rotation="5deg" scale="0.65" />
+
       <div class="section-header" data-aos="fade-right">
         <span class="section-label">{{ t.label }}</span>
         <h2 class="section-title">
@@ -57,9 +68,18 @@
 
 <script setup>
 import { inject } from 'vue';
+import Sticker from './Sticker.vue';
+import { allStickerPaths } from '../stickers.js';
 
 const lang = inject('lang');
 const t = inject('translations')[lang.value].projects;
+
+const randomSticker = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker2 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker3 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker4 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker5 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker6 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
 
 const projectsList = [
   {

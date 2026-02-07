@@ -60,7 +60,7 @@
         >
           <!-- Removed image-glow and tilt logic for brutalist static look -->
           <div class="image-container">
-            <img src="/evernight-dancing.gif" alt="Heiznerd Avatar">
+            <img src="/stickers/misc/evernight-dancing.gif" alt="Dancing" class="hero-sticker" />
           </div>
           <div class="status-badge">
             <span class="status-dot pulse"></span>

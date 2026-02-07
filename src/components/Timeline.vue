@@ -1,6 +1,17 @@
 <template>
   <section id="timeline" class="timeline">
     <div class="container">
+      <!-- Local Stickers -->
+      <Sticker text="LEVEL UP" top="20%" right="10%" rotation="-15deg" color="var(--primary)" />
+      <Sticker text="KEEP GOING" bottom="30%" left="5%" rotation="10deg" color="var(--accent)" />
+      <!-- Random Character Sticker -->
+      <Sticker :image="randomSticker" top="10%" left="15%" rotation="5deg" scale="0.8" />
+      <Sticker :image="randomSticker2" top="40%" right="5%" rotation="-10deg" scale="0.7" />
+      <Sticker :image="randomSticker3" bottom="10%" left="10%" rotation="15deg" scale="0.6" />
+      <Sticker :image="randomSticker4" top="60%" right="15%" rotation="-8deg" scale="0.75" />
+      <Sticker :image="randomSticker5" top="25%" left="5%" rotation="10deg" scale="0.7" />
+      <Sticker :image="randomSticker6" bottom="5%" right="30%" rotation="-5deg" scale="0.65" />
+
       <div class="section-header" data-aos="fade-right">
         <span class="section-label">{{ t.label }}</span>
         <h2 class="section-title">{{ t.title }}</h2>
@@ -130,7 +141,16 @@
 
 <script setup>
 import { inject } from 'vue';
+import Sticker from './Sticker.vue';
+import { allStickerPaths } from '../stickers.js';
 
 const lang = inject('lang');
 const t = inject('translations')[lang.value].timeline;
+
+const randomSticker = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker2 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker3 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker4 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker5 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker6 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
 </script>

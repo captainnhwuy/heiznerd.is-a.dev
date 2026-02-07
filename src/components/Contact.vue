@@ -1,6 +1,10 @@
 <template>
   <section id="contact" class="contact">
     <div class="container">
+      <!-- Local Stickers -->
+      <Sticker text="HIRE ME" bottom="10%" left="10%" rotation="5deg" color="var(--primary)" />
+      <Sticker text="SEND EMAIL" bottom="15%" right="10%" rotation="-10deg" color="#00FFFF" />
+
       <div class="section-header" data-aos="fade-up">
         <span class="section-label">{{ t.label }}</span>
         <h2 class="section-title">{{ t.title }}</h2>
@@ -52,6 +56,8 @@
 
 <script setup>
 import { inject } from 'vue';
+import Sticker from './Sticker.vue';
+
 const lang = inject('lang');
 const t = inject('translations')[lang.value].contact;
 </script>

@@ -1,6 +1,18 @@
 <template>
   <section id="skills" class="skills">
     <div class="container">
+      <!-- Local Stickers -->
+      <Sticker text="PIXEL PERFECT" top="15%" left="2%" rotation="15deg" color="var(--secondary)" />
+      <Sticker text="CLEAN CODE" bottom="10%" right="5%" rotation="-8deg" color="#FFFFFF" />
+      <Sticker text="ALWAYS LEARNING" top="5%" right="15%" rotation="5deg" color="var(--primary)" />
+      <!-- Random Character Sticker -->
+      <Sticker :image="randomSticker" top="60%" left="10%" rotation="-10deg" scale="0.8" />
+      <Sticker :image="randomSticker2" top="5%" left="40%" rotation="5deg" scale="0.7" />
+      <Sticker :image="randomSticker3" bottom="0%" right="10%" rotation="-15deg" scale="0.6" />
+      <Sticker :image="randomSticker4" top="30%" left="5%" rotation="8deg" scale="0.7" />
+      <Sticker :image="randomSticker5" bottom="40%" right="5%" rotation="-5deg" scale="0.8" />
+      <Sticker :image="randomSticker6" top="10%" right="35%" rotation="15deg" scale="0.6" />
+
       <div class="section-header" data-aos="fade-right">
         <span class="section-label">{{ t.label }}</span>
         <h2 class="section-title">{{ t.title }}</h2>
@@ -157,9 +169,19 @@
 
 <script setup>
 import { ref, inject } from 'vue';
+import Sticker from './Sticker.vue';
+import { allStickerPaths } from '../stickers.js';
 
 const lang = inject('lang');
 const t = inject('translations')[lang.value].skills;
+
+const randomSticker = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker2 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker3 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+
+const randomSticker4 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker5 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
+const randomSticker6 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
 
 const languages = ref([
   { name: 'Vue.js', level: 30, icon: 'fab fa-vuejs', color: '#42b883' },

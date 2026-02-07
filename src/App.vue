@@ -4,13 +4,18 @@
     <Loading :hide="!isLoading" @hide-loading="hideLoading" :show-skip-button="true" />
     <template v-if="!isLoading">
       <CustomCursor />
+      <RandomShape :count="12" />
+      <BackgroundStickers />
       <Navbar />
       <VerticalMarquee />
+      <ScrollProgress />
       
       <!-- Decorative Stickers -->
-      <Sticker text="100% VUE.JS" top="15%" right="10%" rotation="15deg" color="var(--primary)" />
-      <Sticker text="NO BUGS" top="45%" left="5%" rotation="-10deg" color="var(--secondary)" />
-      <Sticker text="APPROVED" bottom="20%" right="15%" rotation="5deg" color="#00FFFF" />
+      <!-- Hero/Intro Stickers -->
+      <Sticker text="HELLO WORLD" top="12%" left="10%" rotation="-12deg" color="var(--primary)" />
+      <Sticker text="VUE.JS DEV" top="18%" right="12%" rotation="8deg" color="#00FFFF" />
+
+
 
       <Hero />
       <Marquee />
@@ -30,6 +35,9 @@ import VerticalMarquee from './components/VerticalMarquee.vue';
 import Sticker from './components/Sticker.vue';
 import Navbar from './components/Navbar.vue';
 import Loading from './components/Loading.vue'; // Keep explicit import for LCP/First view
+import ScrollProgress from './components/ScrollProgress.vue';
+import RandomShape from './components/RandomShape.vue';
+import BackgroundStickers from './components/BackgroundStickers.vue';
 import { ref, provide, reactive, watch, nextTick, defineAsyncComponent, onMounted, onUnmounted } from 'vue';
 import { translations } from './translations.js';
 import Typed from 'typed.js';

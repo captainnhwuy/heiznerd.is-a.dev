@@ -112,43 +112,43 @@ const playlist = [
     songName: "Vết Thương",
     artist: "fishy",
     audioUrl: "/music/vết thương.mp3",
-    coverImage: "/VETTHUONG.jpg"
+    coverImage: "/stickers/misc/VETTHUONG.jpg"
   },
   {
     songName: "Em Còn Nhớ Anh Không",
     artist: "Hoang Ton (Remix)",
     audioUrl: "/music/Em Còn Nhớ Anh Không (feat. Koo) (Htingale X Ryuuko Remix) - Hoang Ton.mp3",
-    coverImage: "/EMCONNHOANHKHONG.jpg"
+    coverImage: "/stickers/misc/EMCONNHOANHKHONG.jpg"
   },
   {
     songName: "Life Is Good",
     artist: "Seachains ft. Lê Tích Kỳ",
     audioUrl: "/music/Life Is Good (feat. Lê Tích Kỳ) - Seachains.mp3",
-    coverImage: "/LIFEISGOOD.jpg"
+    coverImage: "/stickers/misc/LIFEISGOOD.jpg"
   },
   {
     songName: "Mờ Phai",
     artist: "Xoxad",
     audioUrl: "/music/MOPHAI - Xoxad.mp3",
-    coverImage: "/MOPHAI.jpg"
+    coverImage: "/stickers/misc/MOPHAI.jpg"
   },
   {
     songName: "Ngày Đêm",
     artist: "NOEN",
     audioUrl: "/music/NGÀY ĐÊM - NOEN.mp3",
-    coverImage: "/NGÀY ĐÊM THUMBNAIL.jpg"
+    coverImage: "/stickers/misc/NGÀY ĐÊM THUMBNAIL.jpg"
   },
   {
     songName: "Sao Soi Đường Đêm",
     artist: "Trung Trần",
     audioUrl: "/music/SAO SOI DUONG DEM - Trung Trần.mp3",
-    coverImage: "/SAOSOIDUONGDEN.jpg"
+    coverImage: "/stickers/misc/SAOSOIDUONGDEN.jpg"
   },
   {
     songName: "Kể về Em",
     artist: "Unknown",
     audioUrl: "/music/keveem.mp3",
-    coverImage: "/preview.jpg"
+    coverImage: "/stickers/misc/preview.jpg"
   }
 ];
 

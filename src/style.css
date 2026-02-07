@@ -37,9 +37,9 @@
     --glitch-offset: 2px;
 
     /* Compatibility / Legacy (to be brutalized) */
-    --glass-bg: var(--bg-dark);
-    --glass-border: var(--border-thick);
-    --glass-blur: none;
+    --glass-bg: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    --glass-border: none;
+    --glass-blur: blur(10px);
     --glass-shadow: none;
     --gradient-primary: var(--primary);
     --gradient-secondary: var(--secondary);
@@ -81,24 +81,60 @@ body {
 
 /* Selection */
 ::selection {
-    background: var(--primary);
-    color: black;
+    background: var(--secondary);
+    /* Magenta/Pink */
+    color: white;
+    text-shadow: none;
+    -webkit-text-stroke: 0;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 16px;
     background: var(--bg-darker);
-    border-left: 1px solid var(--text-muted);
+    border-left: 2px solid var(--primary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--text-primary);
-    border: 2px solid var(--bg-darker);
+    background: var(--primary);
+    border: 4px solid var(--bg-darker);
+    /* Creates a blocky "floating" look */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
+    background: white;
+    border-color: black;
+}
+
+/* Scrollbar Corner */
+::-webkit-scrollbar-corner {
+    background: var(--bg-darker);
+}
+
+@keyframes noise-anim {
+    0% {
+        background-position: 0 0;
+    }
+
+    20% {
+        background-position: 2px -2px;
+    }
+
+    40% {
+        background-position: -2px 2px;
+    }
+
+    60% {
+        background-position: -2px -2px;
+    }
+
+    80% {
+        background-position: 2px 2px;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
 }
 
 /* Container */
@@ -108,7 +144,9 @@ body {
     padding: 0 var(--space-md);
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
-    background: var(--bg-dark);
+    background: radial-gradient(ellipse at center, rgba(5, 5, 5, 0.8) 0%, rgba(5, 5, 5, 0) 80%);
+    backdrop-filter: blur(5px);
+    border: none;
 }
 
 /* Section */
@@ -352,7 +390,9 @@ body::after {
     z-index: 1000;
     padding: 1rem 0;
     transition: all 0.2s;
-    background: var(--bg-dark);
+    background: rgba(5, 5, 5, 0.6);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px 20px rgba(0, 0, 0, 0.6);
     border-bottom: 2px solid var(--text-primary);
 }
 
@@ -393,7 +433,8 @@ body::after {
     gap: 0;
     align-items: center;
     border: 2px solid var(--text-primary);
-    background: black;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
+    backdrop-filter: blur(10px);
 }
 
 .nav-link {
@@ -632,7 +673,10 @@ body::after {
     max-width: 600px;
     border-left: 5px solid var(--primary);
     padding: 1.5rem;
-    background: #0a0a0a;
+    background: radial-gradient(circle at center, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0) 100%);
+    backdrop-filter: blur(5px);
+    border: none;
+    box-shadow: none;
     position: relative;
     font-family: 'JetBrains Mono', monospace;
     box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.05);
@@ -659,7 +703,9 @@ body::after {
     text-align: center;
     flex: 1;
     padding: 1.5rem 1rem;
-    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 30px 15px rgba(0, 0, 0, 0.5);
     border: 1px solid var(--text-muted);
     transition: all 0.2s;
     position: relative;
@@ -1254,6 +1300,7 @@ body::after {
 .tech-card {
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(5px);
     border: 1px solid var(--glass-border);
     border-radius: 15px;
     display: flex;
@@ -1324,7 +1371,7 @@ body::after {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: var(--glass-bg);
+    background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--glass-border);
     color: var(--text-primary);
     cursor: pointer;
@@ -1382,6 +1429,10 @@ body::after {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 100%);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none;
 }
 
 .project-image {
@@ -1544,6 +1595,10 @@ body::after {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 90%);
+    backdrop-filter: blur(5px);
+    border: none;
+    box-shadow: none;
 }
 
 .contact-icon {
