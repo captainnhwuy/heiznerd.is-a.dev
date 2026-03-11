@@ -1,115 +1,83 @@
-<script setup>
-import { inject } from 'vue';
-import Sticker from './Sticker.vue';
-import { allStickerPaths } from '../stickers.js';
-
-const lang = inject('lang');
-const t = inject('translations')[lang.value].about;
-
-const randomSticker = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
-const randomSticker2 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
-const randomSticker3 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
-const randomSticker4 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
-const randomSticker5 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
-const randomSticker6 = allStickerPaths[Math.floor(Math.random() * allStickerPaths.length)];
-</script>
-
 <template>
   <section id="about" class="about">
+    <!-- Geometric decorators -->
+    <div class="section-geo section-geo--br"></div>
+
     <div class="container">
-      <!-- Local Stickers -->
-      <Sticker text="WHO AM I?" top="-5%" left="5%" rotation="-5deg" color="var(--primary)" />
-      <Sticker text="14 Y/O DEV" top="10%" right="5%" rotation="10deg" color="var(--secondary)" />
-      <!-- Random Character Sticker -->
-      <Sticker :image="randomSticker" top="85%" left="45%" rotation="15deg" scale="0.8" />
-      <Sticker :image="randomSticker2" top="-2%" right="15%" rotation="-10deg" scale="0.7" />
-      <Sticker :image="randomSticker3" bottom="5%" left="2%" rotation="20deg" scale="0.6" />
-      <Sticker :image="randomSticker4" top="40%" right="5%" rotation="-5deg" scale="0.75" />
-      <Sticker :image="randomSticker5" bottom="15%" right="30%" rotation="12deg" scale="0.65" />
-      <Sticker :image="randomSticker6" top="20%" left="10%" rotation="-8deg" scale="0.7" />
-      
-      <div class="section-header" data-aos="fade-up">
-        <span class="section-label">{{ t.label }}</span>
+      <!-- Section header -->
+      <div class="drift from-top">
+        <span class="section-eyebrow">{{ t.label }}</span>
         <h2 class="section-title">{{ t.title }}</h2>
-        <div class="section-subtitle-text" v-if="t.headerSubtitle">{{ t.headerSubtitle }}</div>
       </div>
-      <div class="about-content">
-        <div class="about-text" data-aos="fade-right" data-aos-delay="100">
-          <div class="glass-card about-card">
-            <div class="card-icon">
+
+      <div class="about-grid">
+        <!-- Left: Bio card -->
+        <div class="md-card bio-card drift from-left">
+          <div class="bio-header">
+            <div class="bio-avatar-ring">
               <i class="fas fa-user-astronaut"></i>
             </div>
-            <p class="about-paragraph">
-              <span class="highlight">{{ t.intro }}</span> {{ t.paragraph1 }}
-            </p>
-            <p class="about-paragraph">
-              {{ t.paragraph2 }}
-            </p>
-            <p class="about-paragraph">
-              {{ t.paragraph3 }}
-            </p>
-            <div class="about-interests">
-              <h4 class="interests-title">{{ t.interests }}</h4>
-              <div class="interests-tags">
-                <span class="interest-tag"><i class="fas fa-code"></i> {{ t.coding }}</span>
-                <span class="interest-tag"><i class="fas fa-film"></i> {{ t.anime }}</span>
-                <span class="interest-tag"><i class="fas fa-heart"></i> {{ t.romcom }}</span>
-                <span class="interest-tag"><i class="fas fa-gamepad"></i> {{ t.gaming }}</span>
-              </div>
+            <div>
+              <h3 class="bio-name">Heiznerd</h3>
+              <p class="bio-handle">@captainnhwuy · Vietnam 🇻🇳</p>
+            </div>
+          </div>
+
+          <div class="bio-body">
+            <p><span class="bio-hi">{{ t.intro }}</span> {{ t.paragraph1 }}</p>
+            <p>{{ t.paragraph2 }}</p>
+            <p>{{ t.paragraph3 }}</p>
+          </div>
+
+          <div class="bio-interests">
+            <p class="interests-label">{{ t.interests }}</p>
+            <div class="interests-chips drift-stagger">
+              <span class="md-chip drift burst"><i class="fas fa-code"></i> {{ t.coding }}</span>
+              <span class="md-chip drift burst"><i class="fas fa-film"></i> {{ t.anime }}</span>
+              <span class="md-chip drift burst"><i class="fas fa-heart"></i> {{ t.romcom }}</span>
+              <span class="md-chip drift burst"><i class="fas fa-gamepad"></i> {{ t.gaming }}</span>
             </div>
           </div>
         </div>
-        <div class="about-image" data-aos="fade-left" data-aos-delay="200">
-          <div class="glass-card code-window">
-            <div class="window-header">
-              <div class="window-controls">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
+
+        <!-- Right: Code window -->
+        <div class="drift from-right">
+          <div class="md-card code-window">
+            <div class="window-bar">
+              <div class="window-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
               </div>
               <div class="window-title">whoami.js</div>
+              <div></div>
             </div>
-            <pre class="code-content"><code class="language-javascript"><span class="code-keyword">const</span> <span class="code-var">developer</span> = {
-  <span class="code-property">name</span>: <span class="code-string">"Heiznerd"</span>,
-  <span class="code-property">aka</span>: <span class="code-string">"Capta1nHwuy"</span>,
-  <span class="code-property">age</span>: <span class="code-number">14</span>,
-  <span class="code-property">location</span>: <span class="code-string">"Vietnam 🇻🇳"</span>,
-  <span class="code-property">passion</span>: [
-    <span class="code-string">"Vue.js"</span>,
-    <span class="code-string">"JavaScript"</span>,
-    <span class="code-string">"Anime"</span>,
-    <span class="code-string">"Building Cool Stuff"</span>
+            <pre class="code-body"><code><span class="ck">const</span> <span class="cv">developer</span> = {
+  <span class="cp">name</span>:   <span class="cs">"Heiznerd"</span>,
+  <span class="cp">aka</span>:    <span class="cs">"Capta1nHwuy"</span>,
+  <span class="cp">age</span>:    <span class="cn">14</span>,
+  <span class="cp">from</span>:   <span class="cs">"Vietnam 🇻🇳"</span>,
+  <span class="cp">stack</span>: [
+    <span class="cs">"Vue.js"</span>,
+    <span class="cs">"JavaScript"</span>,
+    <span class="cs">"Node.js"</span>,
+    <span class="cs">"Ruby on Rails"</span>
   ],
-  <span class="code-property">currentStatus</span>: <span class="code-string">"Learning & Creating"</span>,
-  <span class="code-property">motto</span>: <span class="code-function">() =></span> {
-    <span class="code-keyword">return</span> <span class="code-string">"Dream big, code bigger"</span>;
+  <span class="cp">status</span>: <span class="cs">"Learning &amp; Building"</span>,
+  <span class="cp">motto</span>: <span class="cf">() =&gt;</span> {
+    <span class="ck">return</span> <span class="cs">"Dream big, code bigger"</span>;
   }
 };</code></pre>
           </div>
-          <div class="floating-elements">
-            <div class="float-item" data-aos="fade" data-aos-delay="300">
-              <i class="fab fa-vuejs"></i>
-            </div>
-            <div class="float-item" data-aos="fade" data-aos-delay="350">
-              <i class="fab fa-js"></i>
-            </div>
-            <div class="float-item" data-aos="fade" data-aos-delay="400">
-              <i class="fab fa-node"></i>
-            </div>
-            <div class="float-item" data-aos="fade" data-aos-delay="450">
-              <i class="fab fa-react"></i>
-            </div>
-            <div class="float-item" data-aos="fade" data-aos-delay="500">
-              <i class="fab fa-python"></i>
-            </div>
-            <div class="float-item" data-aos="fade" data-aos-delay="550">
-              <i class="fab fa-html5"></i>
-            </div>
-            <div class="float-item" data-aos="fade" data-aos-delay="600">
-              <i class="fab fa-css3-alt"></i>
-            </div>
-            <div class="float-item" data-aos="fade" data-aos-delay="650">
-              <i class="fab fa-git-alt"></i>
+
+          <!-- Mini stats row under code window -->
+          <div class="mini-stats">
+            <div class="mini-stat" v-for="s in miniStats" :key="s.label">
+              <span class="ms-icon"><i :class="s.icon" :style="{ color: s.color }"></i></span>
+              <div class="ms-info">
+                <span class="ms-val">{{ s.val }}</span>
+                <span class="ms-label">{{ s.label }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -117,3 +85,207 @@ const randomSticker6 = allStickerPaths[Math.floor(Math.random() * allStickerPath
     </div>
   </section>
 </template>
+
+<script setup>
+import { inject } from 'vue';
+const lang = inject('lang');
+const t = inject('translations')[lang.value].about;
+
+const miniStats = [
+  { icon: 'fas fa-code', color: '#BB86FC', val: '2y+', label: 'Coding' },
+  { icon: 'fas fa-rocket', color: '#42b883', val: '3+', label: 'Projects Live' },
+  { icon: 'fas fa-star', color: '#f7df1e', val: '∞', label: 'Learning' },
+];
+
+</script>
+
+<style scoped>
+.about { background: transparent; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 48px;
+}
+
+/* Bio card */
+.bio-card {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bio-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bio-avatar-ring {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--md-radius-md);
+  background: linear-gradient(135deg, var(--md-primary-container), rgba(187,134,252,0.2));
+  border: 1px solid rgba(187,134,252,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--md-primary);
+  flex-shrink: 0;
+}
+
+.bio-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--md-on-surface);
+}
+
+.bio-handle {
+  font-size: 0.82rem;
+  color: var(--md-on-surface-var);
+  margin-top: 2px;
+}
+
+.bio-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bio-body p {
+  font-size: 0.95rem;
+  color: var(--md-on-surface-var);
+  line-height: 1.7;
+}
+
+.bio-hi {
+  color: var(--md-primary);
+  font-weight: 600;
+}
+
+.interests-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--md-on-surface-var);
+  margin-bottom: 10px;
+}
+
+.interests-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Code window */
+.code-window {
+  overflow: hidden;
+  padding: 0;
+}
+
+.window-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--md-surface-container);
+  border-bottom: 1px solid var(--md-outline-var);
+}
+
+.window-dots { display: flex; gap: 6px; }
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.window-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--md-on-surface-var);
+}
+
+.code-body {
+  padding: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--md-on-surface-var);
+  overflow-x: auto;
+  background: var(--md-surface);
+  margin: 0;
+}
+
+.ck  { color: #cf68e1; }
+.cv  { color: #61dafb; }
+.cp  { color: #9fd3c7; }
+.cs  { color: #a8d8a8; }
+.cn  { color: #f78c6c; }
+.cf  { color: #82AAFF; }
+
+/* Mini stats row */
+.mini-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.mini-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--md-surface-container);
+  border: 1px solid var(--md-outline-var);
+  border-radius: var(--md-radius-md);
+  transition: all 0.25s var(--md-ease-spring);
+}
+
+.mini-stat:hover {
+  border-color: rgba(187, 134, 252, 0.25);
+  background: var(--md-surface-high);
+  transform: translateY(-2px);
+}
+
+.ms-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.ms-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ms-val {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--md-on-surface);
+  line-height: 1;
+}
+
+.ms-label {
+  font-size: 0.68rem;
+  color: var(--md-on-surface-var);
+  white-space: nowrap;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

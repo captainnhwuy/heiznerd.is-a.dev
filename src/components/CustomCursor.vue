@@ -79,45 +79,47 @@ onUnmounted(() => {
   pointer-events: none;
   z-index: 10000;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
 }
 
 .custom-cursor {
   position: fixed;
-  width: 20px;
-  height: 20px;
-  background-color: white; /* Inverts to black on dark bg */
-  border-radius: 0; /* Square for brutalism */
+  width: 10px;
+  height: 10px;
+  background-color: var(--md-primary);
+  border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 10002;
-  mix-blend-mode: difference;
-  transition: width 0.2s, height 0.2s, background-color 0.2s, transform 0.1s;
+  transition: width 0.25s var(--md-ease-spring),
+              height 0.25s var(--md-ease-spring),
+              background-color 0.25s,
+              transform 0.1s;
+  box-shadow: 0 0 8px rgba(187, 134, 252, 0.4);
 }
 
 .custom-cursor.hovering {
-  width: 80px;
-  height: 80px;
-  background-color: white;
-  mix-blend-mode: difference;
-  border-radius: 50%; /* Circle on hover */
+  width: 36px;
+  height: 36px;
+  background-color: rgba(187, 134, 252, 0.15);
+  border: 1.5px solid var(--md-primary);
+  box-shadow: 0 0 16px rgba(187, 134, 252, 0.25);
 }
 
 .custom-cursor.clicking {
-  transform: translate(-50%, -50%) scale(0.5);
+  transform: translate(-50%, -50%) scale(0.7);
 }
 
 .cursor-trail {
   position: fixed;
-  width: 15px;
-  height: 15px;
-  background-color: var(--primary);
-  border-radius: 0;
+  width: 4px;
+  height: 4px;
+  background-color: var(--md-primary);
+  border-radius: 50%;
   pointer-events: none;
   z-index: 10001;
   transition: opacity 0.1s;
+  opacity: 0.4;
 }
 </style>
