@@ -4,7 +4,7 @@
       <!-- Logo -->
       <a :href="isPomodoroPage ? '/' : '#home'" class="nav-logo">
         <div class="logo-icon">
-          <span class="logo-monogram">HN</span>
+          <img src="/heiznerd-logo.png" alt="Heiznerd" class="logo-img" />
         </div>
         <span class="logo-text">Heiznerd</span>
       </a>
@@ -144,13 +144,12 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll));
   transition: transform 0.3s var(--md-ease-spring), border-color 0.3s;
 }
 
-.logo-monogram {
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--md-primary);
-  letter-spacing: -0.02em;
-  line-height: 1;
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
 }
 
 .nav-logo:hover .logo-icon {

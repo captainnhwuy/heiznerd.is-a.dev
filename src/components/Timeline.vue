@@ -75,15 +75,18 @@ const t = inject('translations')[lang.value].timeline;
 
 .tl-dot {
   position: absolute;
-  left: calc(-28px + 2px);
-  top: 18px;
+  /* Line is at left:9px of .timeline-track.
+     Track padding-left is 28px, so relative to item:
+     line_x = 9px - 28px = -19px. Center dot: -19px - 8px = -27px */
+  left: -27px;
+  top: 20px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
   background: var(--md-surface);
   border: 2px solid var(--md-outline);
-  transform: translateX(-50%);
   transition: all 0.3s var(--md-ease-spring);
+  z-index: 1;
 }
 
 .tl-dot.dot-active {
@@ -95,7 +98,7 @@ const t = inject('translations')[lang.value].timeline;
 .timeline-item:hover .tl-dot {
   background: var(--md-primary);
   border-color: var(--md-primary);
-  transform: translateX(-50%) scale(1.2);
+  transform: scale(1.2);
 }
 
 /* Card */
