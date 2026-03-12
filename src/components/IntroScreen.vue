@@ -90,6 +90,9 @@
         </div>
       </div>
 
+      <!-- Skip hint -->
+      <div class="i-skip-hint">Press SPACE to skip</div>
+
     </div>
   </Transition>
 </template>
@@ -129,7 +132,13 @@ const orbitStyleFor = (i) => {
 };
 
 // Helpers
-const wait   = ms  => new Promise(r => setTimeout(r, ms));
+const isSkipping = ref(false);
+
+const wait = ms => new Promise(r => {
+  if (isSkipping.value) return; // Suspend if skipping
+  setTimeout(r, ms);
+});
+
 const show   = key => { vis[key] = true; };
 const typeIn = async (key, text, delay) => {
   for (let i = 0; i <= text.length; i++) {
@@ -185,8 +194,29 @@ const onDone = () => {
   emit('done');
 };
 
-onMounted(runIntro);
-onUnmounted(() => { document.body.style.overflow = ''; });
+const skipIntro = () => {
+  if (isSkipping.value) return;
+  isSkipping.value = true;
+  visible.value = false;
+  window.removeEventListener('keydown', handleKeyDown);
+};
+
+const handleKeyDown = (e) => {
+  if (e.code === 'Space') {
+    e.preventDefault();
+    skipIntro();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown);
+  runIntro();
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDown);
+  document.body.style.overflow = '';
+});
 </script>
 
 <style scoped>
@@ -519,10 +549,29 @@ onUnmounted(() => { document.body.style.overflow = ''; });
 }
 @keyframes caretBlink { 50% { opacity: 0; } }
 
+/* ========== SKIP HINT ========== */
+.i-skip-hint {
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 100;
+}
+
 /* ========== Responsive ========== */
 @media (max-width: 900px) {
   .i-right { display: none; }
   .i-nav-links { display: none; }
   .i-left { padding-right: 0; }
+  .i-skip-hint {
+    bottom: 20px;
+    right: 20px;
+    font-size: 0.65rem;
+  }
 }
 </style>

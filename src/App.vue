@@ -34,7 +34,6 @@
     </main>
 
     <Footer />
-    <Music />
   </div>
 </template>
 
@@ -47,12 +46,10 @@ import { ref, provide, reactive, onMounted, onUnmounted, defineAsyncComponent } 
 import { translations } from './translations.js';
 
 const Footer = defineAsyncComponent(() => import('./components/Footer.vue'));
-const Music = defineAsyncComponent(() => import('./components/Music.vue'));
 
-// Show intro only once per browser session
-const showIntro = ref(!sessionStorage.getItem('intro-done'));
+// Show intro on every load
+const showIntro = ref(true);
 const onIntroDone = () => {
-  sessionStorage.setItem('intro-done', '1');
   showIntro.value = false;
 };
 
