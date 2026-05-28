@@ -1,21 +1,12 @@
 <template>
   <section id="home" class="hero">
+    <!-- Blueprint grid scanning lines overlay -->
+    <div class="blueprint-overlay"></div>
 
-    <!-- Background geometric blocks (Material style) -->
-    <div class="geo-block geo-1"></div>
-    <div class="geo-block geo-2"></div>
-    <div class="geo-block geo-3"></div>
-
-    <div class="hero-inner container">
-      <!-- Left: Text content -->
-      <div class="hero-content drift from-left">
-        <div class="hero-badge">
-          <span class="badge-dot"></span>
-          <span>{{ t.available }}</span>
-        </div>
-
-        <p class="hero-greeting">{{ t.greeting }}</p>
-
+    <div class="hero-inner container dashboard-grid">
+      <!-- CELL 1: BRAND HEADER PANEL (Top-Left) -->
+      <div class="db-cell cell-header drift from-left">
+        <span class="db-tag">SYS_NAME_DECK</span>
         <!-- Font cycling hero name -->
         <div class="hero-name-wrap">
           <h1
@@ -31,92 +22,116 @@
             </span>
           </transition>
         </div>
+      </div>
 
-        <h2 class="hero-role">
-          <span class="typed-text"></span>
-          <span class="cursor-blink">|</span>
-        </h2>
+      <!-- CELL 2: BIOMETRIC SCANNER (Top-Right) -->
+      <div class="db-cell cell-scanner drift from-right">
+        <span class="db-tag">SYS_VISUAL_SCANNER</span>
+        <div class="scanner-frame">
+          <!-- Cyber crosshair decorations -->
+          <div class="crosshair-tl"></div>
+          <div class="crosshair-tr"></div>
+          <div class="crosshair-bl"></div>
+          <div class="crosshair-br"></div>
+          
+          <div class="scanner-radar"></div>
+          
+          <!-- Orbit system -->
+          <div class="orbit-system" ref="orbitRef">
+            <div class="avatar-frame">
+              <div class="avatar-frame-inner">
+                <img src="/stickers/misc/evernight-dancing.gif" alt="Heiznerd" class="avatar-img" />
+              </div>
+            </div>
 
-        <p class="hero-desc">{{ t.description }}</p>
-
-        <!-- Stats row -->
-        <div class="hero-stats drift-stagger">
-          <div class="stat-chip drift burst">
-            <span class="stat-val">{{ githubData.repos ?? t.stats.projectsVal }}</span>
-            <span class="stat-lbl">{{ t.projects }}</span>
+            <!-- Orbital icons -->
+            <div
+              v-for="(tech, i) in orbitalTechs"
+              :key="tech.name"
+              class="orbit-pill"
+              :style="orbitStyles[i]"
+              :title="tech.name"
+            >
+              <i :class="tech.icon" :style="{ color: tech.color }"></i>
+            </div>
           </div>
-          <div class="stat-chip drift burst">
-            <span class="stat-val">{{ t.stats.ageVal }}</span>
-            <span class="stat-lbl">{{ t.age }}</span>
-          </div>
-          <div class="stat-chip drift burst">
-            <span class="stat-val">{{ githubData.followers ?? t.stats.techVal }}</span>
-            <span class="stat-lbl">{{ githubData.followers != null ? 'Followers' : t.technologies }}</span>
-          </div>
-        </div>
-
-        <!-- Buttons -->
-        <div class="hero-actions">
-          <a href="#projects" class="md-btn md-btn-filled">
-            <i class="fas fa-rocket"></i>
-            <span>{{ t.viewWork }}</span>
-          </a>
-          <a href="#contact" class="md-btn md-btn-outlined">
-            <i class="fas fa-paper-plane"></i>
-            <span>{{ t.contact }}</span>
-          </a>
-        </div>
-
-        <!-- Quote card -->
-        <div class="quote-card" v-if="quote.content">
-          <i class="fas fa-quote-left quote-icon"></i>
-          <p class="quote-text">{{ quote.content }}</p>
-          <span class="quote-author">— {{ quote.author }}</span>
-        </div>
-
-        <!-- Social links -->
-        <div class="social-row">
-          <a href="https://github.com/captainnhwuy" target="_blank" class="social-btn" title="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://discord.com/users/1316287191634149377" target="_blank" class="social-btn" title="Discord">
-            <i class="fab fa-discord"></i>
-          </a>
-          <a href="https://www.facebook.com/nguyen.huu.quy.906170" target="_blank" class="social-btn" title="Facebook">
-            <i class="fab fa-facebook"></i>
-          </a>
         </div>
       </div>
 
-      <!-- Right: Avatar + orbit -->
-      <div class="hero-avatar-wrap drift from-right">
-        <!-- Orbit system -->
-        <div class="orbit-system" ref="orbitRef">
-          <!-- Clean geometric avatar frame: square rotated 45° = diamond -->
-          <div class="avatar-frame">
-            <div class="avatar-frame-inner">
-              <img src="/stickers/misc/evernight-dancing.gif" alt="Heiznerd" class="avatar-img" />
-            </div>
+      <!-- CELL 3: SPEC SHEET (Bottom-Left) -->
+      <div class="db-cell cell-specs drift from-left" style="transition-delay: 100ms">
+        <span class="db-tag">SYS_SPECIFICATIONS</span>
+        
+        <div class="specs-content">
+          <!-- Availability Badge -->
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span>{{ t.available }}</span>
           </div>
 
-          <!-- Orbital icons rendered via JS into absolute positions -->
-          <div
-            v-for="(tech, i) in orbitalTechs"
-            :key="tech.name"
-            class="orbit-pill"
-            :style="orbitStyles[i]"
-            :title="tech.name"
-          >
-            <i :class="tech.icon" :style="{ color: tech.color }"></i>
+          <p class="hero-greeting">// {{ t.greeting }}</p>
+          
+          <h2 class="hero-role">
+            <span class="typed-text"></span>
+            <span class="cursor-blink">|</span>
+          </h2>
+
+          <p class="hero-desc">{{ t.description }}</p>
+
+          <!-- Buttons -->
+          <div class="hero-actions">
+            <a href="#projects" class="md-btn md-btn-filled">
+              <i class="fas fa-rocket"></i>
+              <span>{{ t.viewWork }}</span>
+            </a>
+            <a href="#contact" class="md-btn md-btn-outlined">
+              <i class="fas fa-paper-plane"></i>
+              <span>{{ t.contact }}</span>
+            </a>
           </div>
         </div>
+      </div>
 
-        <!-- GitHub meta card -->
-        <div class="avatar-meta" v-if="githubData.name">
-          <img :src="githubData.avatar" :alt="githubData.name" class="gh-avatar" />
-          <div>
-            <p class="gh-name">{{ githubData.name }}</p>
-            <p class="gh-handle">@captainnhwuy</p>
+      <!-- CELL 4: SYSTEM KERNEL CONSOLE (Bottom-Right) -->
+      <div class="db-cell cell-console drift from-right" style="transition-delay: 150ms">
+        <span class="db-tag">SYS_KERNEL_CONSOLE</span>
+        
+        <div class="console-content">
+          <!-- Quote card as terminal output -->
+          <div class="quote-card" v-if="quote.content">
+            <div class="console-header">
+              <span class="console-dot red"></span>
+              <span class="console-dot yellow"></span>
+              <span class="console-dot green"></span>
+              <span class="console-title">motd.sh</span>
+            </div>
+            <pre class="console-body"><code><span class="c-prompt">$</span> cat quote.txt
+<span class="c-text">"{{ quote.content }}"</span>
+<span class="c-author">— {{ quote.author }}</span></code></pre>
+          </div>
+
+          <div class="console-bottom">
+            <!-- GitHub meta card -->
+            <div class="avatar-meta" v-if="githubData.name">
+              <img :src="githubData.avatar" :alt="githubData.name" class="gh-avatar" />
+              <div>
+                <p class="gh-name">{{ githubData.name }}</p>
+                <p class="gh-handle">@captainnhwuy</p>
+              </div>
+            </div>
+
+            <!-- Social links -->
+            <div class="social-row">
+              <a href="https://github.com/captainnhwuy" target="_blank" class="social-btn" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://discord.com/users/1316287191634149377" target="_blank" class="social-btn" title="Discord">
+                <i class="fab fa-discord"></i>
+              </a>
+              <a href="https://www.facebook.com/nguyen.huu.quy.906170" target="_blank" class="social-btn" title="Facebook">
+                <i class="fab fa-facebook"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -222,11 +237,12 @@ const namePhase = ref(''); // '' | 'phase-exit' | 'phase-swap' | 'phase-enter'
 
 const FONTS = [
   { family: "'Google Sans Display', sans-serif", label: 'Google Sans' },
-  { family: "'Playfair Display', serif",          label: 'Playfair Display' },
-  { family: "'Bebas Neue', sans-serif",            label: 'Bebas Neue' },
-  { family: "'Space Grotesk', sans-serif",         label: 'Space Grotesk' },
-  { family: "'Josefin Sans', sans-serif",          label: 'Josefin Sans' },
-  { family: "'Righteous', cursive",                label: 'Righteous' },
+  { family: "'Bricolage Grotesk', sans-serif",   label: 'Bricolage' },
+  { family: "'Bebas Neue', sans-serif",          label: 'Bebas Neue' },
+  { family: "'Unbounded', sans-serif",           label: 'Unbounded' },
+  { family: "'Josefin Sans', sans-serif",        label: 'Josefin Sans' },
+  { family: "'Righteous', cursive",              label: 'Righteous' },
+  { family: "'JetBrains Mono', monospace",       label: 'JetBrains Mono' },
 ];
 
 const currentFont = computed(() => FONTS[fontIndex.value]);
@@ -271,395 +287,236 @@ onUnmounted(() => { clearInterval(fontTimer); });
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 0 60px;
+  padding: 40px 0 80px;
   position: relative;
   overflow: hidden;
+  background-color: transparent;
 }
 
-/* ---- Geometric background blocks ---- */
-/* These are the Material-inspired rotating geometric shapes */
-.geo-block {
+/* Blueprint grids overlay */
+.blueprint-overlay {
   position: absolute;
-  border-radius: 24px;
+  inset: 0;
   pointer-events: none;
-  opacity: 0.04;
-  border: 1.5px solid var(--md-primary);
-  background: transparent;
+  background-image: 
+    linear-gradient(rgba(187, 134, 252, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(187, 134, 252, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 50%, transparent 100%);
+  opacity: 0.8;
+  z-index: 0;
 }
 
-.geo-1 {
-  width: 320px;
-  height: 320px;
-  top: -60px;
-  right: 8%;
-  transform: rotate(20deg);
-  animation: geoSpin1 40s linear infinite;
-}
-
-.geo-2 {
-  width: 200px;
-  height: 200px;
-  bottom: 10%;
-  left: 5%;
-  transform: rotate(-30deg);
-  animation: geoSpin2 55s linear infinite reverse;
-  opacity: 0.035;
-}
-
-.geo-3 {
-  width: 140px;
-  height: 140px;
-  top: 35%;
-  left: 18%;
-  transform: rotate(45deg);
-  animation: geoSpin1 70s linear infinite;
-  opacity: 0.025;
-  border-radius: 12px;
-}
-
-@keyframes geoSpin1 {
-  to { transform: rotate(380deg); }
-}
-@keyframes geoSpin2 {
-  to { transform: rotate(-390deg); }
-}
-
-/* ---- Layout ---- */
-.hero-inner {
+/* =============================================
+   DASHBOARD GRID SYSTEM
+   ============================================= */
+.dashboard-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 60px;
+  grid-template-columns: 1.25fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0;
+  border: 1px solid var(--md-outline-var);
+  border-radius: var(--md-radius-xl);
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   position: relative;
   z-index: 1;
 }
 
-/* ---- Left content ---- */
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  background: rgba(187, 134, 252, 0.07);
-  border: 1px solid rgba(187, 134, 252, 0.2);
-  border-radius: 100px;
-  font-size: 0.82rem;
-  font-weight: 500;
+/* Standard Spec Cell */
+.db-cell {
+  padding: 36px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Tag labels on top-right of cells */
+.db-tag {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
   color: var(--md-primary);
-  margin-bottom: 20px;
+  opacity: 0.35;
+  letter-spacing: 0.1em;
 }
 
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--md-primary);
-  animation: pulseDot 2.5s ease-in-out infinite;
+/* Grid Dividers */
+.cell-header,
+.cell-specs {
+  border-right: 1px solid var(--md-outline-var);
 }
 
-@keyframes pulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.7); }
+.cell-header,
+.cell-scanner {
+  border-bottom: 1px solid var(--md-outline-var);
 }
 
-.hero-greeting {
-  font-size: 1rem;
-  color: var(--md-on-surface-var);
-  margin-bottom: 6px;
-  font-weight: 400;
+/* =============================================
+   CELL 1: BRAND HEADER
+   ============================================= */
+.cell-header {
+  min-height: 180px;
 }
 
-/* ---- Font cycling ---- */
 .hero-name-wrap {
   position: relative;
-  display: inline-block;
-  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  height: clamp(3rem, 7.5vw, 5.5rem);
+  min-height: 70px;
 }
 
 .hero-name {
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 700;
+  font-size: clamp(2rem, 6.5vw, 4.5rem);
+  font-weight: 900;
   line-height: 1;
   color: var(--md-on-surface);
-  display: block;
   letter-spacing: -0.04em;
-  opacity: 1;
-  transform: translateY(0);
+  text-transform: uppercase;
   transition: opacity 0.4s ease, transform 0.4s ease;
   will-change: opacity, transform;
+  white-space: nowrap;
 }
 
-/* EXIT: fade up slightly */
 .hero-name.phase-exit {
   opacity: 0;
-  transform: translateY(-14px);
-  transition: opacity 0.38s ease, transform 0.38s ease;
+  transform: translateY(-12px);
 }
 
-/* ENTER: fade in from below */
 .hero-name.phase-enter {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(12px);
 }
 
-/* Font label pill */
 .font-pill {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.07em;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--md-on-surface-var);
   background: var(--md-surface-container);
   border: 1px solid var(--md-outline-var);
   border-radius: 100px;
-  padding: 3px 10px 3px 8px;
+  padding: 3px 10px;
   position: absolute;
-  bottom: -4px;
+  bottom: -16px;
   right: 0;
   white-space: nowrap;
-  backdrop-filter: blur(6px);
 }
 
 .font-pill i { font-size: 0.52rem; color: var(--md-primary); }
 
-/* Pill slide transition */
 .pill-fade-enter-active {
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .pill-fade-leave-active {
   transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 1, 1);
 }
-.pill-fade-enter-from { opacity: 0; transform: translateY(8px) scale(0.92); }
-.pill-fade-leave-to   { opacity: 0; transform: translateY(-5px) scale(0.95); }
+.pill-fade-enter-from { opacity: 0; transform: translateY(6px) scale(0.95); }
+.pill-fade-leave-to   { opacity: 0; transform: translateY(-4px) scale(0.97); }
 
-.hero-role {
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  font-weight: 400;
-  color: var(--md-primary);
-  margin-bottom: 20px;
-  min-height: 2em;
-  font-family: var(--font-sans);
-}
-
-.cursor-blink {
-  animation: blink 1s step-end infinite;
-  color: var(--md-primary);
-  font-weight: 300;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-.hero-desc {
-  font-size: 1rem;
-  color: var(--md-on-surface-var);
-  max-width: 440px;
-  line-height: 1.7;
-  margin-bottom: 28px;
-}
-
-/* Stats */
-.hero-stats {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-
-.stat-chip {
-  display: flex;
-  flex-direction: column;
+/* =============================================
+   CELL 2: BIOMETRIC SCANNER (Avatar & radar)
+   ============================================= */
+.cell-scanner {
   align-items: center;
-  padding: 12px 18px;
-  background: var(--md-surface-container);
-  border: 1px solid var(--md-outline-var);
-  border-radius: var(--md-radius-lg);
-  gap: 2px;
-  transition: all 0.25s var(--md-ease-spring);
-  min-width: 80px;
 }
 
-.stat-chip:hover {
-  border-color: rgba(187, 134, 252, 0.25);
-  background: var(--md-surface-high);
-  transform: translateY(-3px);
-}
-
-.stat-val {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--md-primary);
-  font-family: var(--font-display);
-  line-height: 1;
-}
-
-.stat-lbl {
-  font-size: 0.7rem;
-  color: var(--md-on-surface-var);
-  font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-}
-
-/* Actions */
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 24px;
-}
-
-/* Social */
-.social-row {
-  display: flex;
-  gap: 8px;
-}
-
-.social-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--md-radius-md);
-  background: transparent;
-  border: 1px solid var(--md-outline-var);
+.scanner-frame {
+  position: relative;
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.005);
+  border: 1px dashed rgba(187, 134, 252, 0.15);
+  border-radius: var(--md-radius-xl);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--md-on-surface-var);
-  font-size: 0.95rem;
-  text-decoration: none;
-  transition: all 0.25s var(--md-ease-spring);
+  overflow: hidden;
 }
 
-.social-btn:hover {
-  border-color: rgba(187, 134, 252, 0.35);
-  color: var(--md-primary);
-  background: rgba(187, 134, 252, 0.06);
-  transform: translateY(-2px);
+/* Biometric corners */
+.crosshair-tl, .crosshair-tr, .crosshair-bl, .crosshair-br {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--md-primary);
+  opacity: 0.5;
+  z-index: 2;
 }
+.crosshair-tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.crosshair-tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
+.crosshair-bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
+.crosshair-br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 
-/* Quote card */
-.quote-card {
-  background: var(--md-surface-container);
-  border: 1px solid var(--md-outline-var);
-  border-left: 3px solid rgba(187, 134, 252, 0.5);
-  border-radius: var(--md-radius-md);
-  padding: 12px 14px 12px 16px;
-  margin-bottom: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  animation: quoteFadeIn 0.6s var(--md-ease-spring);
-}
-
-@keyframes quoteFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.quote-icon {
-  font-size: 0.7rem;
-  color: rgba(187, 134, 252, 0.5);
-}
-
-.quote-text {
-  font-size: 0.82rem;
-  color: var(--md-on-surface-var);
-  font-style: italic;
-  line-height: 1.55;
-}
-
-.quote-author {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--md-primary);
-  opacity: 0.8;
-}
-
-
-/* ========================
-   Right: Orbit System
-   ======================== */
-.hero-avatar-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
+.scanner-radar {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform-origin: center center;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(3, 218, 198, 0.12) 0deg, transparent 90deg);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .orbit-system {
   position: relative;
-  width: 420px;
-  height: 420px;
-  flex-shrink: 0;
+  width: 260px;
+  height: 260px;
+  z-index: 2;
 }
 
-/* Subtle dashed orbit ring (single stroke, no rainbow) */
+/* Dashed inner circle */
 .orbit-system::before {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 390px;
-  height: 390px;
+  width: 230px;
+  height: 230px;
   border-radius: 50%;
-  border: 1px dashed rgba(187, 134, 252, 0.15);
+  border: 1px dashed rgba(187, 134, 252, 0.12);
   pointer-events: none;
 }
 
-/* ---- Avatar frame: geometric pill with corner accent ---- */
 .avatar-frame {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 240px;
-  height: 240px;
-  /* Geometric accent: rotated square corners */
-  border-radius: 40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
   background: var(--md-surface-container);
   border: 1px solid rgba(187, 134, 252, 0.2);
-  padding: 6px;
-  box-shadow:
-    0 0 0 1px rgba(187, 134, 252, 0.08),
-    0 24px 48px rgba(0, 0, 0, 0.5);
+  padding: 4px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.5);
   animation: frameFloat 6s ease-in-out infinite;
-}
-
-/* Small square decorators at corners — Material geometric accent */
-.avatar-frame::before,
-.avatar-frame::after {
-  content: '';
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(187, 134, 252, 0.4);
-  border-radius: 3px;
-}
-.avatar-frame::before {
-  top: -6px; left: -6px;
-}
-.avatar-frame::after {
-  bottom: -6px; right: -6px;
-  border-color: rgba(187, 134, 252, 0.25);
 }
 
 @keyframes frameFloat {
   0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
-  50%       { transform: translate(-50%, -50%) translateY(-10px); }
+  50%       { transform: translate(-50%, -50%) translateY(-6px); }
 }
 
 .avatar-frame-inner {
   width: 100%;
   height: 100%;
-  border-radius: 34px;
+  border-radius: 50%;
   overflow: hidden;
   background: var(--md-surface);
 }
@@ -668,123 +525,345 @@ onUnmounted(() => { clearInterval(fontTimer); });
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 34px;
 }
 
-/* ---- Orbital pills ---- */
 .orbit-pill {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--md-radius-md);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   background: var(--md-surface-container);
   border: 1px solid var(--md-outline-var);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  cursor: default;
-  transition: transform 0.25s var(--md-ease-spring), border-color 0.25s, background 0.25s;
+  font-size: 0.85rem;
+  transition: transform 0.2s;
   animation: orbitFloat 4s ease-in-out infinite;
 }
 
 .orbit-pill:hover {
-  transform: scale(1.2) !important;
-  border-color: rgba(187, 134, 252, 0.4);
-  background: var(--md-surface-high);
-  z-index: 10;
+  transform: scale(1.15) !important;
+  border-color: var(--md-primary);
 }
 
-@keyframes orbitFloat {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-5px); }
+/* =============================================
+   CELL 3: SPEC SHEET (Role & Description)
+   ============================================= */
+.cell-specs {
+  gap: 16px;
 }
 
-/* ---- GitHub meta card ---- */
-.avatar-meta {
-  display: flex;
+.hero-badge {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: var(--md-surface-container);
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(187, 134, 252, 0.05);
+  border: 1px solid rgba(187, 134, 252, 0.15);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--md-primary);
+  width: fit-content;
+  margin-bottom: 12px;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--md-primary);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.hero-greeting {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--md-on-surface-var);
+  opacity: 0.8;
+}
+
+.hero-role {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-weight: 600;
+  color: var(--md-secondary);
+  font-family: var(--font-sans);
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+  color: var(--md-secondary);
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-desc {
+  font-size: 0.95rem;
+  color: var(--md-on-surface-var);
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* =============================================
+   CELL 4: KERNEL CONSOLE
+   ============================================= */
+.cell-console {
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.console-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.quote-card {
+  background: var(--md-surface);
   border: 1px solid var(--md-outline-var);
-  border-radius: var(--md-radius-xl);
-  padding: 10px 16px;
+  border-radius: var(--md-radius-lg);
+  overflow: hidden;
   box-shadow: var(--md-shadow-1);
 }
 
-.gh-avatar {
-  width: 32px;
-  height: 32px;
+.console-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.015);
+  border-bottom: 1px solid var(--md-outline-var);
+}
+
+.console-dot {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  border: 1.5px solid rgba(187, 134, 252, 0.3);
+}
+.console-dot.red { background: #ff5f56; }
+.console-dot.yellow { background: #ffbd2e; }
+.console-dot.green { background: #27c93f; }
+
+.console-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--md-on-surface-var);
+  margin-left: 8px;
+  opacity: 0.75;
+}
+
+.console-body {
+  padding: 14px 18px;
+  margin: 0;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.6;
+}
+
+.c-prompt {
+  color: var(--md-secondary);
+  font-weight: 700;
+}
+
+.c-text {
+  color: var(--md-on-surface);
+  display: block;
+  margin: 4px 0;
+  font-style: italic;
+}
+
+.c-author {
+  color: var(--md-primary);
+  opacity: 0.85;
+  font-weight: 600;
+}
+
+.console-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* GitHub profile chip */
+.avatar-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--md-outline-var);
+  border-radius: var(--md-radius-md);
+  padding: 8px 12px;
+}
+
+.gh-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.2px solid rgba(187, 134, 252, 0.3);
 }
 
 .gh-name {
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 0.78rem;
   color: var(--md-on-surface);
+  line-height: 1;
 }
 
 .gh-handle {
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   color: var(--md-on-surface-var);
+  margin-top: 1px;
 }
 
-/* ---- Scroll hint ---- */
+/* Social links row */
+.social-row {
+  display: flex;
+  gap: 6px;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--md-radius-md);
+  background: transparent;
+  border: 1px solid var(--md-outline-var);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--md-on-surface-var);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.25s var(--md-ease-spring);
+}
+
+.social-btn:hover {
+  border-color: var(--md-primary);
+  color: var(--md-primary);
+  background: rgba(187, 134, 252, 0.06);
+  transform: translateY(-2px);
+}
+
+/* =============================================
+   SCROLL HINTS
+   ============================================= */
 .scroll-hint {
   position: absolute;
-  bottom: 32px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   color: var(--md-on-surface-var);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.55;
+  z-index: 2;
 }
 
 .mouse {
-  width: 20px;
-  height: 32px;
+  width: 18px;
+  height: 28px;
   border: 1.5px solid var(--md-outline);
-  border-radius: 10px;
+  border-radius: 9px;
   display: flex;
   justify-content: center;
-  padding-top: 5px;
+  padding-top: 4px;
 }
 
 .mouse-wheel {
   width: 2px;
-  height: 5px;
+  height: 4px;
   background: var(--md-primary);
-  border-radius: 2px;
-  animation: scrollWheel 2.5s ease-in-out infinite;
+  border-radius: 1px;
+  animation: scrollWheel 2s ease-in-out infinite;
 }
 
 @keyframes scrollWheel {
   0%, 100% { transform: translateY(0); opacity: 1; }
-  50%       { transform: translateY(8px); opacity: 0.2; }
+  50%       { transform: translateY(6px); opacity: 0.2; }
 }
 
-/* ---- Responsive ---- */
+/* =============================================
+   RESPONSIVE LAYOUTS
+   ============================================= */
 @media (max-width: 900px) {
-  .hero-inner {
+  .dashboard-grid {
     grid-template-columns: 1fr;
-    text-align: center;
-    gap: 40px;
+    grid-template-rows: auto;
   }
-  .hero-content { order: 2; }
-  .hero-avatar-wrap { order: 1; }
-  .hero-actions, .hero-stats, .social-row { justify-content: center; }
-  .hero-badge { margin-left: auto; margin-right: auto; }
-  .orbit-system { width: 300px; height: 300px; }
-  .avatar-frame { width: 180px; height: 180px; }
-  .orbit-system::before { width: 280px; height: 280px; }
-  .geo-1, .geo-2, .geo-3 { display: none; }
+  
+  .db-cell {
+    border-right: none !important;
+    padding: 28px 24px;
+  }
+  
+  .cell-header,
+  .cell-scanner,
+  .cell-specs {
+    border-bottom: 1px solid var(--md-outline-var) !important;
+  }
+  
+  .orbit-system {
+    width: 220px;
+    height: 220px;
+  }
+  .orbit-system::before {
+    width: 190px;
+    height: 190px;
+  }
+  .avatar-frame {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 20px;
+  }
+  .db-cell {
+    padding: 24px 16px;
+  }
+  .console-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
+
+<style>
+/* Unscoped styling to ensure global animation binds correctly to the radar element without hashing */
+.scanner-radar {
+  animation: globalRadarRotate 10s linear infinite !important;
+}
+
+@keyframes globalRadarRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

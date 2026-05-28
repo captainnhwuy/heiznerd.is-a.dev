@@ -41,7 +41,7 @@
         </div>
 
         <!-- Right: Code window -->
-        <div class="drift from-right">
+        <div class="drift from-right about-right-panel">
           <div class="md-card code-window">
             <div class="window-bar">
               <div class="window-dots">
@@ -104,17 +104,34 @@ const miniStats = [
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
+  grid-template-columns: 1fr 1.2fr;
   margin-top: 48px;
+  border: 1px solid var(--md-outline-var);
+  border-radius: var(--md-radius-xl);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--md-shadow-2);
 }
 
-/* Bio card */
+/* Bio card (Left Panel) */
 .bio-card {
-  padding: 28px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-right: 1px solid var(--md-outline-var);
+  box-shadow: none;
+}
+
+.bio-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--md-outline-var);
 }
 
 .bio-header {
@@ -127,8 +144,8 @@ const miniStats = [
   width: 54px;
   height: 54px;
   border-radius: var(--md-radius-md);
-  background: linear-gradient(135deg, var(--md-primary-container), rgba(187,134,252,0.2));
-  border: 1px solid rgba(187,134,252,0.3);
+  background: rgba(187, 134, 252, 0.08);
+  border: 1.5px solid rgba(187, 134, 252, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +155,7 @@ const miniStats = [
 }
 
 .bio-name {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--md-on-surface);
 }
@@ -172,7 +189,7 @@ const miniStats = [
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--md-on-surface-var);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .interests-chips {
@@ -181,18 +198,36 @@ const miniStats = [
   gap: 8px;
 }
 
-/* Code window */
+/* Right column container */
+.about-right-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Code window (Top Right) */
 .code-window {
-  overflow: hidden;
-  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid var(--md-outline-var);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.code-window:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--md-outline-var);
 }
 
 .window-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px;
-  background: var(--md-surface-container);
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.015);
   border-bottom: 1px solid var(--md-outline-var);
 }
 
@@ -211,17 +246,19 @@ const miniStats = [
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--md-on-surface-var);
+  font-weight: 500;
 }
 
 .code-body {
-  padding: 20px;
+  padding: 24px;
   font-family: var(--font-mono);
   font-size: 0.82rem;
   line-height: 1.8;
   color: var(--md-on-surface-var);
   overflow-x: auto;
-  background: var(--md-surface);
+  background: transparent;
   margin: 0;
+  flex: 1;
 }
 
 .ck  { color: #cf68e1; }
@@ -231,29 +268,34 @@ const miniStats = [
 .cn  { color: #f78c6c; }
 .cf  { color: #82AAFF; }
 
-/* Mini stats row */
+/* Mini stats row (Bottom Right) */
 .mini-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 12px;
+  background: rgba(255, 255, 255, 0.005);
+  gap: 0;
+  margin-top: 0;
 }
 
 .mini-stat {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  background: var(--md-surface-container);
-  border: 1px solid var(--md-outline-var);
-  border-radius: var(--md-radius-md);
-  transition: all 0.25s var(--md-ease-spring);
+  gap: 12px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: background 0.3s var(--md-ease-standard);
+}
+
+.mini-stat:not(:last-child) {
+  border-right: 1px solid var(--md-outline-var);
 }
 
 .mini-stat:hover {
-  border-color: rgba(187, 134, 252, 0.25);
-  background: var(--md-surface-high);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.03);
+  transform: none;
 }
 
 .ms-icon {
@@ -264,12 +306,12 @@ const miniStats = [
 .ms-info {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
 
 .ms-val {
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--md-on-surface);
   line-height: 1;
@@ -281,11 +323,27 @@ const miniStats = [
   white-space: nowrap;
 }
 
-
 /* Responsive */
 @media (max-width: 768px) {
   .about-grid {
     grid-template-columns: 1fr;
+  }
+  .bio-card {
+    border-right: none;
+    border-bottom: 1px solid var(--md-outline-var);
+  }
+  .mini-stat {
+    padding: 16px 12px;
+    justify-content: center;
+  }
+}
+@media (max-width: 480px) {
+  .mini-stats {
+    grid-template-columns: 1fr;
+  }
+  .mini-stat:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--md-outline-var);
   }
 }
 </style>

@@ -299,41 +299,65 @@ onMounted(() => {
 /* ===============================
    Bento Board
    =============================== */
+/* ===============================
+   Bento Board
+   =============================== */
 .bento-board {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  gap: 12px;
+  gap: 0;
+  border: 1px solid var(--md-outline-var);
+  border-radius: var(--md-radius-xl);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--md-shadow-2);
 }
 
 /* Category cards */
 .bento-cat {
-  background: var(--md-surface);
-  border: 1px solid var(--md-outline-var);
-  border-radius: 16px;
-  padding: 16px;
-  transition: border-color 0.3s var(--md-ease-spring), background 0.3s, transform 0.3s var(--md-ease-spring);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 20px 24px;
+  transition: background 0.3s var(--md-ease-standard);
   position: relative;
   overflow: hidden;
+  box-shadow: none;
 }
 
-/* Subtle left accent stripe using category color */
 .bento-cat::before {
   content: '';
   position: absolute;
-  top: 16px;
+  top: 0;
   left: 0;
-  width: 3px;
-  height: calc(100% - 32px);
-  border-radius: 0 3px 3px 0;
+  width: 2.5px;
+  height: 100%;
   background: var(--cat-color, var(--md-primary));
-  opacity: 0.5;
+  opacity: 0.35;
 }
 
 .bento-cat:hover {
-  border-color: color-mix(in srgb, var(--cat-color, var(--md-primary)) 30%, transparent);
-  background: var(--md-surface-container);
-  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.02);
+  transform: none;
+}
+
+/* Inside grid borders */
+/* Vertical divider between left and right column */
+.bento-cat:nth-child(2),
+.bento-cat:nth-child(4) {
+  border-right: 1px solid var(--md-outline-var);
+}
+
+/* Horizontal dividers */
+.bento-cat:nth-child(1),
+.bento-cat:nth-child(2),
+.bento-cat:nth-child(3),
+.bento-cat:nth-child(4),
+.bento-cat:nth-child(5) {
+  border-bottom: 1px solid var(--md-outline-var);
 }
 
 /* Sizes */
@@ -348,42 +372,43 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .bcat-icon {
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
-  background: color-mix(in srgb, var(--cat-color, var(--md-primary)) 15%, transparent);
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--cat-color, var(--md-primary));
 }
 
 .bcat-label {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--md-on-surface-var);
+  color: var(--md-on-surface);
 }
 
 /* Items row */
 .bcat-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
 }
 
 .bcat-item {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
-  background: var(--md-surface-container);
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.015);
   border: 1px solid var(--md-outline-var);
   border-radius: 100px;
   font-size: 0.77rem;
@@ -399,9 +424,9 @@ onMounted(() => {
 }
 
 .bcat-item:hover {
-  border-color: color-mix(in srgb, var(--tc, var(--md-primary)) 40%, transparent);
+  border-color: rgba(255, 255, 255, 0.15);
   color: var(--md-on-surface);
-  background: var(--md-surface-high);
+  background: rgba(255, 255, 255, 0.05);
   transform: translateY(-2px);
 }
 
@@ -410,33 +435,34 @@ onMounted(() => {
    =============================== */
 .bento-exp {
   grid-column: span 2;
-  background: var(--md-surface);
-  border: 1px solid var(--md-outline-var);
-  border-radius: 16px;
-  padding: 18px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+  box-shadow: none;
 }
 
 .exp-line {
   display: grid;
-  grid-template-columns: 36px 1fr 80px;
+  grid-template-columns: 40px 1fr 90px;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 
 .exp-num {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--ec, var(--md-primary));
   white-space: nowrap;
 }
 
 .exp-bar-wrap {
-  height: 4px;
-  background: var(--md-surface-container);
+  height: 5px;
+  background: rgba(255, 255, 255, 0.02);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -446,18 +472,10 @@ onMounted(() => {
   height: 100%;
   background: var(--ec, var(--md-primary));
   border-radius: 4px;
-  opacity: 0.7;
+  opacity: 0.75;
   width: 0;
-  animation: fillBar 1.4s var(--md-ease-decel) 0.5s forwards;
+  transition: width 1.4s var(--md-ease-decel) 0.5s;
 }
-
-@keyframes fillBar {
-  to { width: var(--bar-target, 100%); }
-}
-
-/* Need to set --bar-target dynamically — workaround: just style width directly */
-.exp-bar { width: 0; transition: width 1.4s var(--md-ease-decel) 0.5s; }
-.bento-exp { }
 
 .exp-label {
   font-size: 0.75rem;
@@ -479,5 +497,9 @@ onMounted(() => {
   .bento-board { grid-template-columns: 1fr; }
   .bento-cat:first-child { grid-column: span 1; }
   .bento-exp { grid-column: span 1; }
+  .bento-cat {
+    border-right: none !important;
+    border-bottom: 1px solid var(--md-outline-var) !important;
+  }
 }
 </style>

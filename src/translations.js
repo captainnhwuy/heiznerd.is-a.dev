@@ -92,6 +92,21 @@ export const translations = {
     footer: {
       designedBy: 'Thiết kế & Xây dựng bởi',
       rights: 'Quyền hạn được bảo lưu.'
+    },
+    whatIDo: {
+      label: 'Dịch vụ',
+      title: 'Tớ làm gì?',
+      intro: 'Tớ đang làm việc bán thời gian cho mọi người, với các sản phẩm chính như:',
+      botName: 'Discord Bot',
+      botDesc: 'Có thể là đơn chức năng, hoặc là 1 bot đa dạng chức năng cho các máy chủ nhỏ hoặc tầm trung.',
+      templateName: 'Discord Template',
+      templateDesc: 'Tớ cùng những người bạn sẽ Setup Máy Chủ Discord cho các nhóm bạn, server Discord từ nhỏ đến tầm trung.',
+      qFree: 'Vậy nó có miễn phí không?',
+      aFree: 'Các dự án của tớ đang làm, hầu hết đã được Deprecated và làm lại, nhưng vẫn còn phiên bản open source của nó tại đây: ',
+      qPrice: 'Tớ code Bot Discord hoặc Setup Máy chủ giá bao nhiêu?',
+      aPrice: 'Tùy tính chất và mức độ phức tạp của nó, nó sẽ có giá từ 50k -> 150-200k là tối đa!',
+      qSafety: 'Tớ code có an toàn không để bạn đặt niềm tin tới?',
+      aSafety: 'Bạn có thể tham gia máy chủ [này](https://discord.gg/RxShMCrhgQ), chúng mình đã Setup máy chủ và Bot chỉnh chu cho nhóm bạn này!, vậy nên bạn có thể đặt niềm tin vào mình!'
     }
   },
   en: {
@@ -187,6 +202,21 @@ export const translations = {
     footer: {
       designedBy: 'Designed & Built by',
       rights: 'All rights reserved.'
+    },
+    whatIDo: {
+      label: 'Services',
+      title: 'What I Do',
+      intro: 'I am currently working part-time for people, with core products such as:',
+      botName: 'Discord Bot',
+      botDesc: 'Either single-purpose or multi-functional bots for small to medium-sized Discord servers.',
+      templateName: 'Discord Template',
+      templateDesc: 'My friends and I will set up Discord servers for peer groups or small to medium communities.',
+      qFree: 'Is it free?',
+      aFree: 'Most of the projects I am currently working on have been deprecated and rewritten, but open-source versions are still available here: ',
+      qPrice: 'How much do I charge for coding bots or setting up servers?',
+      aPrice: 'Depending on the complexity, it will range from 50k up to 150k - 200k VND maximum!',
+      qSafety: 'Is it safe to place your trust in me?',
+      aSafety: 'You can join [this server](https://discord.gg/RxShMCrhgQ) where we have fully set up layouts and bots for this group, so you can place your trust in us!'
     }
   }
 };
