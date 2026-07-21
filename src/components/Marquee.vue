@@ -1,97 +1,56 @@
 <template>
-  <div class="marquee-container">
-    <div 
-      class="marquee-content" 
-      ref="marqueeContent"
-      :style="{ transform: `translateX(${offset}px)` }"
-    >
-      <span v-for="n in 20" :key="n" class="marquee-item">
-        FRONTEND <span class="separator">•</span> 
-        BACKEND <span class="separator">•</span> 
-        VUE.JS <span class="separator">•</span> 
-        ANIME <span class="separator">•</span> 
-        DESIGN <span class="separator">•</span>
-      </span>
+  <div class="tech-strip" :class="`direction-${direction}`" role="group" :aria-label="label" :style="{ '--duration': `${duration}s` }">
+    <span class="sr-only">{{ items.map(item => item.name).join(', ') }}</span>
+    <div class="tech-strip-track" aria-hidden="true">
+      <div v-for="copy in 2" :key="copy" class="tech-strip-sequence">
+        <span v-for="item in items" :key="`${copy}-${item.name}`" class="tech-strip-item">
+          <span class="tech-strip-icon" :style="{ '--tone': item.color }">
+            <i v-if="item.icon" :class="item.icon"></i>
+            <b v-else>{{ item.mark }}</b>
+          </span>
+          <span>{{ item.name }}</span>
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-
-const marqueeContent = ref(null);
-const offset = ref(0);
-const baseSpeed = 1;
-let lastScrollY = 0;
-let scrollVelocity = 0;
-let animationFrameId = null;
-
-const animate = () => {
-  scrollVelocity *= 0.95;
-  if (Math.abs(scrollVelocity) < 0.01) scrollVelocity = 0;
-
-  const currentSpeed = baseSpeed + scrollVelocity;
-  offset.value -= currentSpeed;
-
-  const contentWidth = marqueeContent.value ? marqueeContent.value.scrollWidth / 2 : 2000;
-  
-  if (Math.abs(offset.value) >= contentWidth) {
-    offset.value = 0;
-  }
-
-  animationFrameId = requestAnimationFrame(animate);
-};
-
-const handleScroll = () => {
-  const currentScrollY = window.scrollY;
-  const delta = Math.abs(currentScrollY - lastScrollY);
-  scrollVelocity += Math.min(delta * 0.1, 15); 
-  lastScrollY = currentScrollY;
-};
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-  animationFrameId = requestAnimationFrame(animate);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-  cancelAnimationFrame(animationFrameId);
+defineProps({
+  items: { type: Array, required: true },
+  direction: { type: String, default: 'left' },
+  duration: { type: Number, default: 34 },
+  label: { type: String, default: 'Technology stack' },
 });
 </script>
 
 <style scoped>
-.marquee-container {
+.tech-strip {
   width: 100%;
-  background: var(--primary);
-  color: black;
-  padding: 1rem 0;
   overflow: hidden;
-  position: relative;
-  border-bottom: 2px solid var(--text-primary);
-  transform: rotate(-1deg) scale(1.02);
-  z-index: 10;
-  box-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+  border-block: 1px solid var(--md-outline-var);
+  background: rgba(12, 12, 15, 0.52);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
 
-.marquee-content {
-  display: flex;
-  white-space: nowrap;
-  /* Removed CSS Animation */
-  will-change: transform;
-}
+.tech-strip-track { display: flex; width: max-content; animation: stripLeft var(--duration) linear infinite; }
+.direction-right .tech-strip-track { animation-name: stripRight; }
+.tech-strip:hover .tech-strip-track,
+.tech-strip:focus-within .tech-strip-track { animation-play-state: paused; }
+.tech-strip-sequence { display: flex; flex: 0 0 auto; }
+.tech-strip-item { display: flex; align-items: center; gap: 9px; min-width: max-content; padding: 10px 18px; border-right: 1px solid var(--md-outline-var); color: var(--md-on-surface-var); font-family: var(--font-mono); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; }
+.tech-strip-icon { display: grid; width: 26px; height: 26px; place-items: center; border: 1px solid color-mix(in srgb, var(--tone) 34%, transparent); border-radius: 8px; color: var(--tone); background: color-mix(in srgb, var(--tone) 8%, transparent); }
+.tech-strip-icon b { font-size: .52rem; letter-spacing: -.05em; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-.marquee-item {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 900;
-  font-size: 1.5rem;
-  margin-right: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
+@keyframes stripLeft { to { transform: translate3d(-50%,0,0); } }
+@keyframes stripRight { from { transform: translate3d(-50%,0,0); } to { transform: translate3d(0,0,0); } }
 
-.separator {
-  color: white;
+@media (prefers-reduced-motion: reduce) {
+  .tech-strip { mask-image: none; -webkit-mask-image: none; }
+  .tech-strip-track { width: auto; animation: none; }
+  .tech-strip-sequence { flex-wrap: wrap; justify-content: center; }
+  .tech-strip-sequence + .tech-strip-sequence { display: none; }
 }
 </style>

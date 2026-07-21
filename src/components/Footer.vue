@@ -9,7 +9,7 @@
           </div>
           <div>
             <p class="footer-name">Heiznerd</p>
-            <p class="footer-sub">{{ t.designedBy }} Heiznerd · 2025</p>
+            <p class="footer-sub">{{ t.designedBy }} Heiznerd · 2026</p>
           </div>
         </div>
 

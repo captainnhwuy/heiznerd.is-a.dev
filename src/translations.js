@@ -18,6 +18,7 @@ export const translations = {
       viewWork: 'Xem dự án',
       contact: 'Liên hệ',
       available: 'Sẵn sàng làm việc',
+      roles: ['Frontend Developer', 'Vue.js Enthusiast', 'Người xây sản phẩm web'],
       scroll: 'Cuộn xuống',
       stats: {
         projectsVal: '10+',
@@ -37,7 +38,25 @@ export const translations = {
       coding: 'Lập trình',
       anime: 'Anime',
       romcom: 'Rom-com',
-      gaming: 'Gaming'
+      gaming: 'Gaming',
+      learning: 'Đang học hỏi',
+      stackLabel: 'Kỹ năng',
+      stackTitle: 'My TechStack',
+      stackDescription: 'Những công nghệ tớ dùng để biến ý tưởng thành sản phẩm ổn định, nhanh và dễ bảo trì.',
+      categories: {
+        frontend: 'Frontend',
+        backend: 'Backend',
+        database: 'Database',
+        devops: 'DevOps & Tools',
+        experimental: 'Experimental Code'
+      },
+      experienceTitle: 'Kinh nghiệm',
+      experienceSubtitle: 'Thời gian học hỏi và va chạm thực tế với từng nhóm công nghệ.',
+      experience: [
+        { years: '3 năm', description: 'Làm việc với NodeJS bằng JavaScript và TypeScript.' },
+        { years: '2 năm', description: 'Kinh nghiệm code thực chiến với JavaScript và C++.' },
+        { years: '1 năm', description: 'Phát triển Backend với Ruby on Rails và Kafka.' }
+      ]
     },
     skills: {
       label: 'Kỹ năng',
@@ -49,24 +68,35 @@ export const translations = {
     projects: {
       label: 'Portfolio',
       title: 'Featured Projects',
-      headerSubtitle: 'Dự án nổi bật',
-      description: 'Vuốt sang để xem thêm dự án',
-      live: 'Đang hoạt động',
-      beta: 'Beta',
-      nekocomics: {
-        name: 'NekoComics',
-        desc: 'Website đọc truyện thân thiện với độc giả và dịch giả, dễ sử dụng với giao diện hiện đại. Phương châm: "Đọc truyện văn minh, duy trì lâu dài".'
-      },
-      mugi: {
-        name: 'KentaBuckets~',
-        desc: 'Bot Discord đa năng với các tính năng: Uma Musume Discord Games [Beta], Mini Games, hệ thống Balance và nhiều tính năng thú vị khác.'
-      },
-      truycap: {
-        name: 'TruyCapNekoComics',
-        desc: 'Truy cập danh sách tên miền của NekoComics và các dịch vụ liên quan. "Nhanh gọn, tốc độ, dễ dàng truy cập".'
-      },
+      headerSubtitle: 'Hai dự án phản ánh cách tớ xây dựng, thử nghiệm và chia sẻ sản phẩm.',
+      featured: 'Dự án nổi bật',
+      stackLabel: 'Kiến trúc & công nghệ',
+      install: 'Cài đặt',
+      source: 'Xem mã nguồn',
       visit: 'Truy cập',
-      invite: 'Mời bot'
+      active: 'Đang hoạt động',
+      currentWorkTitle: 'Current Work',
+      currentWorkSubtitle: 'Những tổ chức và cộng đồng tớ đang đồng hành, xây dựng và vận hành.',
+      nekocomics: {
+        name: 'NekoComics Rework',
+        status: 'Archived · Private Beta',
+        description: 'Nền tảng truyện tranh của NekoTech đã đóng cửa trước khi ra mắt công khai, trong giai đoạn Private Beta. Mã nguồn được lưu trữ từ ngày 02/07/2026.',
+        meta: 'Archived 02 / 07 / 2026'
+      },
+      nekostream: {
+        name: 'NekoStream CLI',
+        status: 'Open Source',
+        description: 'Ứng dụng client-side mã nguồn mở dành cho terminal users, hỗ trợ xem anime từ các nguồn tại Việt Nam.',
+        meta: 'Node · Client-side CLI'
+      },
+      nekotech: {
+        name: 'NekoTech LLC.',
+        description: 'Đang làm việc và đồng hành cùng NekoTech LLC.'
+      },
+      langbang: {
+        name: 'Làng Băng VN',
+        description: 'Owner cụm EcoSMP tại máy chủ Minecraft Làng Băng VN.'
+      }
     },
     contact: {
       label: 'Liên hệ',
@@ -80,13 +110,20 @@ export const translations = {
     timeline: {
       label: 'Hành trình',
       title: 'My Path',
-      headerSubtitle: 'Chặng đường phát triển',
+      headerSubtitle: 'Những cột mốc đã định hình hành trình học hỏi, xây dựng và trưởng thành của tớ.',
+      linksLabel: 'Liên kết dự án',
+      previous: 'Xem mốc trước',
+      next: 'Xem mốc tiếp theo',
+      scrollLabel: 'Dòng thời gian My Path, cuộn ngang từ trái sang phải',
       items: [
-        { year: '2025', title: 'CO-Founder NekoTech Foundations', desc: 'Leader của NekoComics. Mở rộng hệ sinh thái.' },
-        { year: '2024', title: 'Phát triển NekoComics', desc: 'Xây dựng nền tảng đọc truyện thân thiện với người dùng.' },
-        { year: '2023', title: 'Bắt đầu với Vue.js', desc: 'Chuyển đổi sang sử dụng framework hiện đại và yêu thích Vue.' },
-        { year: '2022', title: 'Làm quen lập trình', desc: 'Bắt đầu hành trình với những dòng code đầu tiên (Discord.js).' },
-        { year: '2011', title: 'Hello World', desc: 'Chào đời và bắt đầu khám phá thế giới.' }
+        { id: 'born', datetime: '2011-08-20', date: '20 / 08 / 2011', kicker: 'Khởi đầu', title: 'Hello, world.', description: 'Chào đời và bắt đầu khám phá thế giới.' },
+        { id: 'practical-coding', datetime: '2024-10', date: '10 / 2024', kicker: 'Lập trình', title: 'Làm quen lập trình thực tiễn', description: 'Bắt đầu tiếp cận lập trình qua các bài toán và dự án thực tế.' },
+        { id: 'nekotech', datetime: '2025-09', date: '09 / 2025', kicker: 'NekoTech LLC.', title: 'Gia nhập NekoTech LLC.', description: 'Đảm nhiệm vai trò CO-Owner và Project Manager.' },
+        { id: 'nekocomics-v2', datetime: '2025-11', date: '11 / 2025', kicker: 'NekoComics', title: 'Phát triển NekoComics V2', description: 'Tham gia xây dựng thế hệ tiếp theo của dự án NekoComics.' },
+        { id: 'english-award', datetime: '2026-01', date: '01 / 2026', kicker: 'Thành tích', title: 'Giải Ba · Huy chương Đồng', description: 'Đạt Giải Ba, Huy chương Đồng tại giải đấu Trường Xuân của THPT Chuyên Nguyễn Chí Thanh, môn Tiếng Anh.' },
+        { id: 'fujiwara-v1', datetime: '2026-03', date: '03 / 2026', kicker: 'FujiwaraShin V1', title: 'Khép lại một phiên bản', description: 'Dừng phát triển Bot Discord FujiwaraShin V1 để tập trung nguồn lực cho một bản làm lại lớn hơn.', links: [{ label: 'NekoTech DiscordBot', href: 'https://github.com/nekoo-moe/NekoTech-DiscordBot' }] },
+        { id: 'nekocomics-open-source', datetime: '2026-05', date: '05 / 2026', kicker: 'Open Source', title: 'NekoComics trở thành mã nguồn mở', description: 'Dừng phát triển sản phẩm NekoComics và chuyển dự án thành mã nguồn mở cho cộng đồng.', links: [{ label: 'NekoComics Rework', href: 'https://github.com/nekoo-moe/NekoComics-Rework' }] },
+        { id: 'nekostream-cli', datetime: '2026-06', date: '06 / 2026', kicker: 'Terminal Experience', title: 'Phát triển NekoStream CLI', description: 'Xây dựng trải nghiệm xem anime miễn phí dành cho terminal users qua lệnh npm install -g nekostream.', current: true, links: [{ label: 'NekoStream CLI', href: 'https://github.com/nekoo-moe/NekoStream-CLI' }] }
       ]
     },
     footer: {
@@ -128,6 +165,7 @@ export const translations = {
       viewWork: 'View Work',
       contact: 'Get in Touch',
       available: 'Available for work',
+      roles: ['Frontend Developer', 'Vue.js Enthusiast', 'Web Product Builder'],
       scroll: 'Scroll down',
       stats: {
         projectsVal: '10+',
@@ -147,7 +185,25 @@ export const translations = {
       coding: 'Coding',
       anime: 'Anime',
       romcom: 'Rom-com',
-      gaming: 'Gaming'
+      gaming: 'Gaming',
+      learning: 'Learning & building',
+      stackLabel: 'Skills',
+      stackTitle: 'My TechStack',
+      stackDescription: 'Technologies I use to turn ideas into stable, fast and maintainable products.',
+      categories: {
+        frontend: 'Frontend',
+        backend: 'Backend',
+        database: 'Database',
+        devops: 'DevOps & Tools',
+        experimental: 'Experimental Code'
+      },
+      experienceTitle: 'Experience',
+      experienceSubtitle: 'Time spent learning and shipping real work across each technology group.',
+      experience: [
+        { years: '3 years', description: 'Working with NodeJS using JavaScript and TypeScript.' },
+        { years: '2 years', description: 'Hands-on development experience with JavaScript and C++.' },
+        { years: '1 year', description: 'Backend development with Ruby on Rails and Kafka.' }
+      ]
     },
     skills: {
       label: 'Skills',
@@ -159,35 +215,53 @@ export const translations = {
     projects: {
       label: 'Portfolio',
       title: 'Featured Projects',
-      headerSubtitle: null,
-      description: 'Swipe to explore more projects',
-      live: 'Live',
-      beta: 'Beta',
+      headerSubtitle: 'Two projects that reflect how I build, experiment and share products.',
+      featured: 'Featured project',
+      stackLabel: 'Architecture & stack',
+      install: 'Install',
+      source: 'View source',
+      visit: 'Visit',
+      active: 'Currently active',
+      currentWorkTitle: 'Current Work',
+      currentWorkSubtitle: 'Organizations and communities I am currently helping build and operate.',
       nekocomics: {
-        name: 'NekoComics',
-        desc: 'Reader-friendly and translator-friendly manga website with modern interface. Motto: "Read manga civilized, maintain long-term".'
+        name: 'NekoComics Rework',
+        status: 'Archived · Private beta',
+        description: 'NekoTech manga platform closed before public release during its Private Beta. The source was archived on 02/07/2026.',
+        meta: 'Archived 02 / 07 / 2026'
       },
-      mugi: {
-        name: 'KentaBuckets~',
-        desc: 'Multi-purpose Discord bot featuring: Uma Musume Discord Games [Beta], Mini Games, Balance system and many other exciting features.'
+      nekostream: {
+        name: 'NekoStream CLI',
+        status: 'Open source',
+        description: 'An open-source client-side application for terminal users, helping people watch anime from sources in Vietnam.',
+        meta: 'Node · Client-side CLI'
       },
-      truycap: {
-        name: 'TruyCapNekoComics',
-        desc: 'Access the list of NekoComics domains and related services. "Quick, fast, easy access".'
+      nekotech: {
+        name: 'NekoTech LLC.',
+        description: 'Currently working with and contributing to NekoTech LLC.'
       },
-      visit: 'Visit Site',
-      invite: 'Invite Bot'
+      langbang: {
+        name: 'Làng Băng VN',
+        description: 'Owner of the EcoSMP cluster on the Làng Băng VN Minecraft server.'
+      }
     },
     timeline: {
       label: 'Journey',
       title: 'My Path',
-      headerSubtitle: null,
+      headerSubtitle: 'Milestones that shaped my path through learning, building and growing.',
+      linksLabel: 'Project links',
+      previous: 'View previous milestone',
+      next: 'View next milestone',
+      scrollLabel: 'My Path timeline, scroll horizontally from left to right',
       items: [
-        { year: '2025', title: 'CO-Founder NekoTech Foundations', desc: 'Leader of NekoComics. Expanding the ecosystem.' },
-        { year: '2024', title: 'Building NekoComics', desc: 'Developing a user-friendly manga reading platform.' },
-        { year: '2023', title: 'Starting with Vue.js', desc: 'Switching to modern frameworks and falling in love with Vue.' },
-        { year: '2022', title: 'First steps in Coding', desc: 'Started the journey with the first lines of code (Discord.js).' },
-        { year: '2011', title: 'Hello World', desc: 'Born and started exploring the world.' }
+        { id: 'born', datetime: '2011-08-20', date: '20 / 08 / 2011', kicker: 'Beginning', title: 'Hello, world.', description: 'Born and began exploring the world.' },
+        { id: 'practical-coding', datetime: '2024-10', date: '10 / 2024', kicker: 'Coding', title: 'Getting into practical programming', description: 'Started approaching programming through real problems and hands-on projects.' },
+        { id: 'nekotech', datetime: '2025-09', date: '09 / 2025', kicker: 'NekoTech LLC.', title: 'Joined NekoTech LLC.', description: 'Took on the roles of CO-Owner and Project Manager.' },
+        { id: 'nekocomics-v2', datetime: '2025-11', date: '11 / 2025', kicker: 'NekoComics', title: 'Developing NekoComics V2', description: 'Helped build the next generation of the NekoComics project.' },
+        { id: 'english-award', datetime: '2026-01', date: '01 / 2026', kicker: 'Achievement', title: 'Third Prize · Bronze Medal', description: 'Won Third Prize and a Bronze Medal in English at the Spring Competition of Nguyen Chi Thanh High School for the Gifted.' },
+        { id: 'fujiwara-v1', datetime: '2026-03', date: '03 / 2026', kicker: 'FujiwaraShin V1', title: 'Closing one version', description: 'Stopped developing the FujiwaraShin V1 Discord bot to focus resources on a larger rebuild.', links: [{ label: 'NekoTech DiscordBot', href: 'https://github.com/nekoo-moe/NekoTech-DiscordBot' }] },
+        { id: 'nekocomics-open-source', datetime: '2026-05', date: '05 / 2026', kicker: 'Open Source', title: 'NekoComics becomes open source', description: 'Stopped product development of NekoComics and opened the project source to the community.', links: [{ label: 'NekoComics Rework', href: 'https://github.com/nekoo-moe/NekoComics-Rework' }] },
+        { id: 'nekostream-cli', datetime: '2026-06', date: '06 / 2026', kicker: 'Terminal Experience', title: 'Developing NekoStream CLI', description: 'Building a free anime experience for terminal users through npm install -g nekostream.', current: true, links: [{ label: 'NekoStream CLI', href: 'https://github.com/nekoo-moe/NekoStream-CLI' }] }
       ]
     },
     contact: {

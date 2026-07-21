@@ -1,467 +1,196 @@
 <template>
   <section id="projects" class="projects">
     <div class="container">
-      <div class="drift from-top">
-        <span class="section-eyebrow">{{ t.label }}</span>
-        <h2 class="section-title">{{ t.title }}</h2>
-        <p class="section-subtitle" v-if="t.headerSubtitle || t.description">{{ t.headerSubtitle || t.description }}</p>
-      </div>
-
-      <!-- Asymmetric layout: Featured Hero Project -->
-      <div v-if="projectsList.length > 0" class="project-hero-wrap">
-        <div class="project-hero-card md-card drift from-bottom">
-          <!-- Left side: details -->
-          <div class="hero-card-details">
-            <div class="card-accent" :style="{ background: projectsList[0].accentColor }"></div>
-            
-            <div class="card-head">
-              <div class="card-icon" :style="{ color: projectsList[0].iconColor }">
-                <i :class="projectsList[0].icon"></i>
-              </div>
-              <div class="card-titles">
-                <span class="featured-badge">{{ t.featured || 'FEATURED PROJECT' }}</span>
-                <h3 class="project-name">{{ t[projectsList[0].key].name }}</h3>
-              </div>
-              <div class="status-chip status-live">
-                <span class="status-dot"></span>
-                LIVE
-              </div>
-            </div>
-
-            <p class="project-desc">{{ t[projectsList[0].key].desc }}</p>
-
-            <div class="tech-ribbon">
-              <span v-for="tech in projectsList[0].tech" :key="tech" class="tech-tag">{{ tech }}</span>
-            </div>
-
-            <!-- GitHub stats -->
-            <div class="gh-stats" v-if="ghStats[projectsList[0].repoName]">
-              <span class="gh-stat">
-                <i class="fas fa-star"></i>
-                {{ ghStats[projectsList[0].repoName].stars ?? 0 }}
-              </span>
-              <span class="gh-stat">
-                <i class="fas fa-code-branch"></i>
-                {{ ghStats[projectsList[0].repoName].forks ?? 0 }}
-              </span>
-              <span class="gh-stat gh-lang" v-if="ghStats[projectsList[0].repoName].language">
-                <i class="fas fa-circle" style="font-size:0.5rem"></i>
-                {{ ghStats[projectsList[0].repoName].language }}
-              </span>
-            </div>
-
-            <a :href="projectsList[0].link" target="_blank" rel="noopener" class="md-btn md-btn-filled project-btn">
-              <i class="fas fa-external-link-alt"></i>
-              <span>{{ t.visit }}</span>
-            </a>
-          </div>
-
-          <!-- Right side: abstract/mockup visualizer -->
-          <div class="hero-card-visual">
-            <div class="mockup-browser">
-              <div class="browser-bar">
-                <span class="browser-dot red"></span>
-                <span class="browser-dot yellow"></span>
-                <span class="browser-dot green"></span>
-                <span class="browser-url">nekocomics.xyz</span>
-              </div>
-              <div class="browser-content">
-                <i class="fas fa-book-open browser-mock-icon"></i>
-                <div class="browser-mock-skeleton">
-                  <div class="skeleton-line title"></div>
-                  <div class="skeleton-line text"></div>
-                  <div class="skeleton-line text short"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <header class="projects-heading drift from-top">
+        <div>
+          <span class="section-eyebrow">{{ t.label }}</span>
+          <h2 class="section-title">{{ t.title }}</h2>
+          <p class="section-subtitle">{{ t.headerSubtitle }}</p>
         </div>
-      </div>
+        <span class="projects-index" aria-hidden="true">04 — SELECTED WORK</span>
+      </header>
 
-      <!-- Secondary Projects Grid -->
-      <div class="projects-secondary-grid">
-        <div
-          v-for="(project, index) in projectsList.slice(1)"
+      <div class="featured-grid">
+        <article
+          v-for="(project, index) in projects"
           :key="project.key"
-          class="project-card md-card drift from-bottom"
-          :style="{ transitionDelay: `${index * 120}ms` }"
+          class="project-card drift from-bottom"
+          :style="{ '--accent': project.color, transitionDelay: `${index * 120}ms` }"
         >
-          <div class="card-accent" :style="{ background: project.accentColor }"></div>
+          <header class="project-head">
+            <span class="project-number">0{{ index + 1 }}</span>
+            <span class="project-icon" aria-hidden="true"><i :class="project.icon"></i></span>
+            <div>
+              <span class="project-kicker">{{ t.featured }}</span>
+              <h3>{{ t[project.key].name }}</h3>
+            </div>
+            <span class="project-status">{{ t[project.key].status }}</span>
+          </header>
 
-          <div class="card-head">
-            <div class="card-icon" :style="{ color: project.iconColor }">
-              <i :class="project.icon"></i>
-            </div>
-            <div class="card-titles">
-              <h3 class="project-name">{{ t[project.key].name }}</h3>
-            </div>
-            <div class="status-chip status-beta">
-              <span class="status-dot"></span>
-              {{ project.status.toUpperCase() }}
-            </div>
+          <p class="project-description">{{ t[project.key].description }}</p>
+
+          <div class="project-stack">
+            <span>{{ t.stackLabel }}</span>
+            <ul>
+              <li v-for="tech in project.stack" :key="tech">{{ tech }}</li>
+            </ul>
           </div>
 
-          <p class="project-desc">{{ t[project.key].desc }}</p>
-
-          <div class="tech-ribbon">
-            <span v-for="tech in project.tech" :key="tech" class="tech-tag">{{ tech }}</span>
+          <div v-if="project.command" class="install-command">
+            <span>{{ t.install }}</span>
+            <code>{{ project.command }}</code>
           </div>
 
-          <a :href="project.link" target="_blank" rel="noopener" class="md-btn md-btn-outlined project-btn">
-            <i class="fab fa-discord"></i>
-            <span>{{ t.invite }}</span>
-          </a>
-        </div>
+          <footer class="project-footer">
+            <span>{{ t[project.key].meta }}</span>
+            <a :href="project.link" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github" aria-hidden="true"></i>
+              <span>{{ t.source }}</span>
+              <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+          </footer>
+        </article>
       </div>
+
+      <section class="current-work drift from-bottom" :aria-labelledby="`${t.currentWorkTitle}-title`">
+        <header class="work-heading">
+          <div>
+            <span class="work-kicker">05 — CURRENT WORK</span>
+            <h3 :id="`${t.currentWorkTitle}-title`">{{ t.currentWorkTitle }}</h3>
+          </div>
+          <p>{{ t.currentWorkSubtitle }}</p>
+        </header>
+
+        <div class="work-list drift-stagger">
+          <article v-for="(role, index) in workRoles" :key="role.key" class="work-role drift from-bottom">
+            <span class="work-number">0{{ index + 1 }}</span>
+            <span class="work-icon" aria-hidden="true"><i :class="role.icon"></i></span>
+            <div class="work-copy">
+              <span>{{ t.active }}</span>
+              <h4>{{ t[role.key].name }}</h4>
+              <p>{{ t[role.key].description }}</p>
+            </div>
+            <a v-if="role.link" :href="role.link" target="_blank" rel="noopener noreferrer" :aria-label="`${t.visit} ${t[role.key].name}`">
+              <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+          </article>
+        </div>
+      </section>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, inject, onMounted } from 'vue';
+import { computed, inject } from 'vue';
+
 const lang = inject('lang');
-const t = inject('translations')[lang.value].projects;
+const translations = inject('translations');
+const t = computed(() => translations[lang.value].projects);
 
-const ghStats = ref({});
-
-const projectsList = [
+const projects = [
   {
     key: 'nekocomics',
-    repoName: 'NekoComics',
     icon: 'fas fa-book-open',
-    iconColor: '#BB86FC',
-    accentColor: 'linear-gradient(90deg, #BB86FC, #9965D8)',
-    status: 'live',
-    tech: ['Vue.js', 'Ruby on Rails', 'PostgreSQL', 'Redis'],
-    link: 'https://nekocomics.xyz/',
+    color: '#b58ce8',
+    stack: ['Vue', 'Vite', 'Rails', 'PostgreSQL', 'Redis', 'Node'],
+    link: 'https://github.com/nekoo-moe/NekoComics-Rework',
   },
   {
-    key: 'mugi',
-    repoName: null,
-    icon: 'fas fa-robot',
-    iconColor: '#5865f2',
-    accentColor: 'linear-gradient(90deg, #5865f2, #3a4bc4)',
-    status: 'beta',
-    tech: ['JavaScript', 'Discord.js', 'Node.js'],
-    link: 'https://discord.com/oauth2/authorize?client_id=1372420632628822057&permissions=8&integration_type=0&scope=bot',
-  },
-  {
-    key: 'truycap',
-    repoName: null,
-    icon: 'fas fa-link',
-    iconColor: '#03DAC6',
-    accentColor: 'linear-gradient(90deg, #03DAC6, #00897B)',
-    status: 'live',
-    tech: ['Vue.js', 'DNS', 'Web'],
-    link: 'https://truycapnekocomics.site/',
+    key: 'nekostream',
+    icon: 'fas fa-terminal',
+    color: '#79c8b5',
+    stack: ['Node'],
+    command: 'npm install -g nekostream',
+    link: 'https://github.com/nekoo-moe/NekoStream-CLI',
   },
 ];
 
-const fetchGhStats = async (repoName) => {
-  if (!repoName) return;
-  try {
-    const res = await fetch(`https://api.github.com/repos/captainnhwuy/${repoName}`);
-    if (!res.ok) return;
-    const data = await res.json();
-    ghStats.value[repoName] = {
-      stars: data.stargazers_count,
-      forks: data.forks_count,
-      language: data.language,
-    };
-  } catch { /* silent fallback */ }
-};
-
-onMounted(() => {
-  projectsList.forEach(p => { if (p.repoName) fetchGhStats(p.repoName); });
-});
+const workRoles = [
+  { key: 'nekotech', icon: 'fas fa-building', link: null },
+  { key: 'langbang', icon: 'fas fa-cube', link: 'https://langbangvn.net' },
+];
 </script>
 
 <style scoped>
 .projects { background: transparent; }
+.projects-heading,
+.project-head,
+.project-footer,
+.work-heading,
+.work-role { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.projects-index,
+.project-number,
+.project-kicker,
+.work-kicker,
+.work-number,
+.work-copy > span,
+.project-stack > span,
+.install-command > span { color: var(--md-on-surface-var); font-family: var(--font-mono); font-size: 0.61rem; letter-spacing: 0.13em; text-transform: uppercase; }
 
-.projects-grid,
-.project-hero-wrap {
-  margin-top: 48px;
+.featured-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
+.project-card { position: relative; display: flex; min-width: 0; min-height: 470px; flex-direction: column; gap: 26px; padding: clamp(26px, 3.5vw, 38px); overflow: hidden; border: 1px solid var(--md-outline-var); border-radius: var(--md-radius-xl); background: rgba(15, 15, 18, 0.67); box-shadow: var(--md-shadow-2); backdrop-filter: blur(14px); transition: transform 300ms var(--md-ease-spring), border-color 300ms ease, background 300ms ease; }
+.project-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 2px; background: linear-gradient(90deg, var(--accent), transparent 72%); }
+.project-card::after { content: ''; position: absolute; width: 220px; height: 220px; top: -150px; right: -110px; border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: 50%; box-shadow: 0 0 0 28px color-mix(in srgb, var(--accent) 3%, transparent); pointer-events: none; }
+.project-card:hover { border-color: color-mix(in srgb, var(--accent) 38%, transparent); background: rgba(23, 20, 28, 0.78); transform: translateY(-5px); }
+.project-head { justify-content: flex-start; }
+.project-head > div { flex: 1; min-width: 0; }
+.project-number { align-self: flex-start; color: color-mix(in srgb, var(--accent) 62%, transparent); }
+.project-icon { display: grid; width: 46px; height: 46px; flex: 0 0 auto; place-items: center; border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent); border-radius: 13px; color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.project-kicker { display: block; margin-bottom: 4px; color: var(--accent); }
+.project-head h3 { color: var(--md-on-surface); font-size: 1.32rem; letter-spacing: -0.025em; }
+.project-status { align-self: flex-start; flex: 0 0 auto; padding: 5px 10px; border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 100px; color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); font-size: 0.62rem; }
+.project-description { color: var(--md-on-surface-var); font-size: 0.91rem; line-height: 1.75; }
+.project-stack > span { display: block; margin-bottom: 11px; }
+.project-stack ul { display: flex; flex-wrap: wrap; gap: 7px; padding: 0; list-style: none; }
+.project-stack li { padding: 6px 10px; border: 1px solid var(--md-outline-var); border-radius: 9px; color: var(--md-on-surface-var); background: rgba(255,255,255,.018); font-family: var(--font-mono); font-size: 0.66rem; }
+.install-command { display: grid; gap: 9px; padding: 13px 15px; border: 1px solid var(--md-outline-var); border-radius: var(--md-radius-md); background: rgba(0,0,0,.18); }
+.install-command code { color: var(--md-secondary); font-family: var(--font-mono); font-size: 0.75rem; user-select: all; }
+.project-footer { margin-top: auto; padding-top: 19px; border-top: 1px solid var(--md-outline-var); }
+.project-footer > span { color: var(--md-on-surface-var); font-size: 0.7rem; }
+.project-footer a { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 8px 12px; border: 1px solid color-mix(in srgb, var(--accent) 36%, transparent); border-radius: 100px; color: var(--accent); text-decoration: none; font-size: 0.7rem; transition: transform 220ms var(--md-ease-spring), background 220ms ease; }
+.project-footer a:hover,
+.project-footer a:focus-visible { background: color-mix(in srgb, var(--accent) 8%, transparent); outline: none; transform: translateY(-2px); }
+
+.current-work { margin-top: 18px; padding: clamp(28px, 4vw, 42px); border: 1px solid var(--md-outline-var); border-radius: var(--md-radius-xl); background: rgba(15,15,18,.6); backdrop-filter: blur(14px); }
+.work-heading { align-items: flex-end; }
+.work-heading h3 { margin-top: 6px; color: var(--md-on-surface); font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: -.04em; }
+.work-heading > p { max-width: 330px; color: var(--md-on-surface-var); font-size: .8rem; line-height: 1.6; text-align: right; }
+.work-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: 30px; border-top: 1px solid var(--md-outline-var); }
+.work-role { position: relative; justify-content: flex-start; min-width: 0; padding: 24px 22px; }
+.work-role + .work-role { border-left: 1px solid var(--md-outline-var); }
+.work-number { color: rgba(187,134,252,.38); }
+.work-icon { display: grid; width: 38px; height: 38px; flex: 0 0 auto; place-items: center; border: 1px solid rgba(187,134,252,.2); border-radius: 50%; color: var(--md-primary); background: rgba(187,134,252,.055); }
+.work-copy { flex: 1; min-width: 0; }
+.work-copy > span { color: var(--md-secondary); }
+.work-copy h4 { margin-top: 4px; color: var(--md-on-surface); font-size: .98rem; }
+.work-copy p { margin-top: 5px; color: var(--md-on-surface-var); font-size: .78rem; line-height: 1.55; }
+.work-role > a { display: grid; width: 36px; height: 36px; flex: 0 0 auto; place-items: center; border: 1px solid var(--md-outline-var); border-radius: 50%; color: var(--md-on-surface-var); text-decoration: none; transition: color 220ms ease, border-color 220ms ease, transform 220ms var(--md-ease-spring); }
+.work-role > a:hover,
+.work-role > a:focus-visible { border-color: var(--md-primary); color: var(--md-primary); outline: none; transform: translate(2px,-2px); }
+
+@media (max-width: 820px) {
+  .featured-grid,
+  .work-list { grid-template-columns: 1fr; }
+  .project-card { min-height: 0; }
+  .work-role + .work-role { border-top: 1px solid var(--md-outline-var); border-left: 0; }
 }
-
-/* Asymmetric Hero Card */
-.project-hero-card {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  padding: 0;
-  overflow: hidden;
-  box-shadow: var(--md-shadow-2);
+@media (max-width: 560px) {
+  .projects-heading,
+  .project-head,
+  .project-footer,
+  .work-heading { align-items: flex-start; flex-wrap: wrap; }
+  .projects-index { display: none; }
+  .project-status { order: 4; margin-left: 66px; }
+  .project-footer { flex-direction: column; }
+  .work-heading > p { max-width: none; text-align: left; }
+  .work-role { align-items: flex-start; padding-inline: 0; }
 }
-
-.hero-card-details {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  position: relative;
-}
-
-/* Accent strip top */
-.card-accent {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  opacity: 0.9;
-}
-
-.card-head {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.card-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: var(--md-radius-md);
-  background: var(--md-surface-container);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  flex-shrink: 0;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.card-titles {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.featured-badge {
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: var(--md-primary);
-  letter-spacing: 0.08em;
-}
-
-.project-name {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--md-on-surface);
-}
-
-/* Status badge */
-.status-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border-radius: var(--md-radius-full);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  flex-shrink: 0;
-}
-
-.status-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  animation: statusPulse 2.2s ease-in-out infinite;
-}
-
-@keyframes statusPulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.45; }
-}
-
-.status-live {
-  color: oklch(78% 0.12 140);
-  background: rgba(76, 175, 80, 0.1);
-  border: 1px solid rgba(76, 175, 80, 0.22);
-}
-
-.status-beta {
-  color: oklch(80% 0.12 80);
-  background: rgba(255, 193, 7, 0.1);
-  border: 1px solid rgba(255, 193, 7, 0.22);
-}
-
-.project-desc {
-  font-size: 0.92rem;
-  color: var(--md-on-surface-var);
-  line-height: 1.65;
-}
-
-/* Tech tag ribbon */
-.tech-ribbon {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.tech-tag {
-  padding: 4px 10px;
-  background: var(--md-surface-container);
-  border: 1px solid var(--md-outline-var);
-  border-radius: var(--md-radius-full);
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--md-on-surface-var);
-}
-
-/* Github stats */
-.gh-stats {
-  display: flex;
-  gap: 16px;
-  border-top: 1px solid var(--md-outline-var);
-  padding-top: 14px;
-}
-
-.gh-stat {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  color: var(--md-on-surface-var);
-  font-family: var(--font-mono);
-}
-
-.gh-stat i { color: var(--md-primary); font-size: 0.75rem; }
-.gh-lang i { color: var(--md-secondary); }
-
-.project-btn {
-  justify-content: center;
-  align-self: flex-start;
-  margin-top: 8px;
-}
-
-/* Visualizer Mockup Panel */
-.hero-card-visual {
-  background: linear-gradient(135deg, rgba(187, 134, 252, 0.04), rgba(3, 218, 198, 0.04));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px;
-  border-left: 1px solid var(--md-outline-var);
-  position: relative;
-}
-
-.mockup-browser {
-  width: 100%;
-  max-width: 280px;
-  background: var(--md-surface);
-  border: 1px solid var(--md-outline);
-  border-radius: 12px;
-  box-shadow: var(--md-shadow-3);
-  overflow: hidden;
-}
-
-.browser-bar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: var(--md-surface-container);
-  border-bottom: 1px solid var(--md-outline-var);
-}
-
-.browser-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-}
-.browser-dot.red { background: #ff5f56; }
-.browser-dot.yellow { background: #ffbd2e; }
-.browser-dot.green { background: #27c93f; }
-
-.browser-url {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  color: var(--md-on-surface-var);
-  margin-left: 8px;
-  opacity: 0.8;
-}
-
-.browser-content {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  min-height: 120px;
-  justify-content: center;
-}
-
-.browser-mock-icon {
-  font-size: 2.2rem;
-  color: var(--md-primary);
-  animation: mockPulse 3s ease-in-out infinite;
-}
-
-@keyframes mockPulse {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px transparent); }
-  50%       { transform: scale(1.08); filter: drop-shadow(0 0 8px rgba(187, 134, 252, 0.25)); }
-}
-
-.browser-mock-skeleton {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;
-}
-
-.skeleton-line {
-  height: 6px;
-  background: var(--md-surface-container);
-  border-radius: 4px;
-}
-
-.skeleton-line.title {
-  width: 60%;
-  height: 8px;
-  background: var(--md-outline);
-}
-
-.skeleton-line.text {
-  width: 80%;
-}
-
-.skeleton-line.text.short {
-  width: 45%;
-}
-
-/* Secondary Grid layout */
-.projects-secondary-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.projects-secondary-grid .project-card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 24px;
-}
-
-.projects-secondary-grid .project-btn {
-  margin-top: auto;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .project-hero-card {
-    grid-template-columns: 1fr;
-  }
-  .hero-card-visual {
-    border-left: none;
-    border-top: 1px solid var(--md-outline-var);
-    padding: 24px;
-  }
-  .projects-secondary-grid {
-    grid-template-columns: 1fr;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-footer a,
+  .work-role > a { transition: none; }
+  .project-card:hover,
+  .project-footer a:hover,
+  .work-role > a:hover { transform: none; }
 }
 </style>

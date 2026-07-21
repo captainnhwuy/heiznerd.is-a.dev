@@ -85,7 +85,6 @@ const t = computed(() => {
         close: 'Thoát',
         gotoHome: 'Đi tới Trang chủ',
         gotoAbout: 'Đi tới Giới thiệu',
-        gotoSkills: 'Đi tới Kỹ năng',
         gotoTimeline: 'Đi tới Hành trình',
         gotoProjects: 'Đi tới Dự án',
         gotoContact: 'Đi tới Liên hệ',
@@ -99,7 +98,6 @@ const t = computed(() => {
         close: 'Close',
         gotoHome: 'Go to Home',
         gotoAbout: 'Go to About',
-        gotoSkills: 'Go to Skills',
         gotoTimeline: 'Go to Timeline',
         gotoProjects: 'Go to Projects',
         gotoContact: 'Go to Contact',
@@ -115,7 +113,6 @@ const inputRef = ref(null);
 const rawCommands = computed(() => [
   { label: t.value.gotoHome, icon: 'fas fa-home', action: () => scrollToSection('home') },
   { label: t.value.gotoAbout, icon: 'fas fa-user-astronaut', action: () => scrollToSection('about') },
-  { label: t.value.gotoSkills, icon: 'fas fa-laptop-code', action: () => scrollToSection('skills') },
   { label: t.value.gotoTimeline, icon: 'fas fa-history', action: () => scrollToSection('timeline') },
   { label: t.value.gotoProjects, icon: 'fas fa-rocket', action: () => scrollToSection('projects') },
   { label: t.value.gotoContact, icon: 'fas fa-paper-plane', action: () => scrollToSection('contact') },

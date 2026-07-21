@@ -1,9 +1,5 @@
 <template>
   <section id="skills" class="skills">
-    <!-- Geometric decorators -->
-    <div class="section-geo section-geo--tl" style="animation: geoSpin1 50s linear infinite;"></div>
-    <div class="section-geo section-geo--br" style="animation: geoSpin2 65s linear infinite;"></div>
-
     <div class="container">
       <div class="drift from-top">
         <span class="section-eyebrow">{{ t.label }}</span>
@@ -207,9 +203,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-@keyframes geoSpin1 { to { transform: rotate(-15deg + 360deg); } }
-@keyframes geoSpin2 { to { transform: rotate(30deg + 360deg); } }
-
 .skills { background: transparent; }
 
 .skills-layout {

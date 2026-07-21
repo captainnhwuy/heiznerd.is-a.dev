@@ -1,33 +1,13 @@
 <template>
-  <div id="app">
-    <div class="noise-bg"></div>
-
+  <div id="app" :class="{ 'intro-done': !showIntro }">
     <!-- Cinematic intro — once per session -->
     <IntroScreen v-if="showIntro" @done="onIntroDone" />
 
-    <!-- Rich background layer: multiple geometric shapes + grid -->
-    <div class="bg-layer" aria-hidden="true">
-      <!-- Rounded rectangles -->
-      <div class="bg-shape s1"></div>
-      <div class="bg-shape s2"></div>
-      <!-- Circle -->
-      <div class="bg-shape s-circle"></div>
-      <!-- Triangle -->
-      <div class="bg-shape s-triangle"></div>
-      <!-- Hexagon -->
-      <div class="bg-shape s-hex"></div>
-      <!-- Diamond -->
-      <div class="bg-shape s-diamond"></div>
-      <!-- Small accent rectangles -->
-      <div class="bg-shape s5"></div>
-      <div class="bg-shape s6"></div>
-      <!-- Dot grid -->
-      <div class="bg-dots"></div>
-    </div>
+    <AnimatedVectorTopography />
 
     <CustomCursor />
     <ScrollProgress />
-    <Navbar />
+    <Navbar :intro-complete="!showIntro" />
 
     <main>
       <router-view />
@@ -42,6 +22,7 @@ import CustomCursor from './components/CustomCursor.vue';
 import ScrollProgress from './components/ScrollProgress.vue';
 import Navbar from './components/Navbar.vue';
 import IntroScreen from './components/IntroScreen.vue';
+import AnimatedVectorTopography from './components/AnimatedVectorTopography.vue';
 import { ref, provide, reactive, onMounted, onUnmounted, defineAsyncComponent } from 'vue';
 import { translations } from './translations.js';
 
@@ -51,6 +32,7 @@ const Footer = defineAsyncComponent(() => import('./components/Footer.vue'));
 const showIntro = ref(true);
 const onIntroDone = () => {
   showIntro.value = false;
+  window.setTimeout(setupDriftObserver, 80);
 };
 
 
@@ -96,17 +78,19 @@ const setupDriftObserver = () => {
   document.querySelectorAll('.drift:not(.visible)').forEach(el => driftObserver.observe(el));
 };
 
+const refreshDrift = () => {
+  if (!showIntro.value) window.setTimeout(setupDriftObserver, 120);
+};
+
 onMounted(() => {
   setupNavObserver();
-  setTimeout(setupDriftObserver, 200);
-  window.addEventListener('drift-refresh', () => {
-    setTimeout(setupDriftObserver, 120);
-  });
+  window.addEventListener('drift-refresh', refreshDrift);
 });
 
 onUnmounted(() => {
   navObserver?.disconnect();
   driftObserver?.disconnect();
+  window.removeEventListener('drift-refresh', refreshDrift);
 });
 </script>
 
@@ -143,116 +127,5 @@ onUnmounted(() => {
 .drift-stagger > *:nth-child(7)  { transition-delay: 420ms; }
 .drift-stagger > *:nth-child(8)  { transition-delay: 490ms; }
 .drift-stagger > *:nth-child(n+9){ transition-delay: 560ms; }
-
-/* ================================================
-   BACKGROUND LAYER
-   ================================================ */
-.bg-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-/* Dot grid pattern */
-.bg-dots {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    circle,
-    rgba(187, 134, 252, 0.28) 1px,
-    transparent 1px
-  );
-  background-size: 36px 36px;
-  opacity: 0.45;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-}
-
-/* Geometric shapes */
-.bg-shape {
-  position: absolute;
-  pointer-events: none;
-}
-
-/* ---- Rounded rectangles (outline style) ---- */
-.s1 {
-  width: 480px; height: 480px;
-  top: -160px; right: -120px;
-  border: 2px solid rgba(187, 134, 252, 0.26);
-  border-radius: 40px;
-  transform: rotate(18deg);
-  animation: bgSpin1 60s linear infinite;
-}
-
-.s2 {
-  width: 360px; height: 360px;
-  bottom: 5%; left: -100px;
-  border: 2px solid rgba(3, 218, 198, 0.22);
-  border-radius: 32px;
-  transform: rotate(-22deg);
-  animation: bgSpin2 80s linear infinite;
-}
-
-/* ---- Circle (outline) ---- */
-.s-circle {
-  width: 240px; height: 240px;
-  top: 35%; left: 3%;
-  border: 2px solid rgba(187, 134, 252, 0.22);
-  border-radius: 50%;
-  animation: bgSpin1 90s linear infinite reverse;
-}
-
-/* ---- Triangle (solid clip-path) ---- */
-.s-triangle {
-  width: 160px; height: 160px;
-  top: 15%; right: 12%;
-  background: rgba(187, 134, 252, 0.09);
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  border-radius: 0;
-  animation: bgSpin2 70s linear infinite;
-}
-
-/* ---- Hexagon (solid clip-path) ---- */
-.s-hex {
-  width: 130px; height: 150px;
-  bottom: 20%; right: 5%;
-  background: rgba(3, 218, 198, 0.08);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  animation: bgSpin1 100s linear infinite;
-}
-
-/* ---- Diamond (square rotated 45°, outline) ---- */
-.s-diamond {
-  width: 120px; height: 120px;
-  top: 60%; left: 18%;
-  border: 2px solid rgba(187, 134, 252, 0.22);
-  border-radius: 8px;
-  transform: rotate(45deg);
-  animation: bgSpin2 55s linear infinite reverse;
-}
-
-/* ---- Small accent rectangles ---- */
-.s5 {
-  width: 200px; height: 200px;
-  bottom: 10%; right: 25%;
-  border: 2px solid rgba(187, 134, 252, 0.18);
-  border-radius: 20px;
-  transform: rotate(12deg);
-  animation: bgSpin1 85s linear infinite;
-}
-
-.s6 {
-  width: 90px; height: 90px;
-  top: 50%; left: 30%;
-  border: 2px solid rgba(3, 218, 198, 0.18);
-  border-radius: 8px;
-  transform: rotate(60deg);
-  animation: bgSpin2 50s linear infinite;
-}
-
-@keyframes bgSpin1 { to { transform: rotate(378deg); } }
-@keyframes bgSpin2 { to { transform: rotate(-382deg); } }
 
 </style>
