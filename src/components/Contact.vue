@@ -57,17 +57,17 @@ const t = inject('translations')[lang.value].contact;
 const contacts = [
   {
     label: 'Discord',
-    handle: 'heiznerd_2008',
+    handle: '.heiznerd',
     icon: 'fab fa-discord',
     color: '#5865f2',
     href: 'https://discord.com/users/1316287191634149377',
   },
   {
     label: 'GitHub',
-    handle: '@captainnhwuy',
+    handle: '@heiznerd',
     icon: 'fab fa-github',
     color: '#a0a0a0',
-    href: 'https://github.com/captainnhwuy',
+    href: 'https://github.com/heiznerd',
   },
   {
     label: 'Facebook',
